@@ -36,6 +36,30 @@
     <div class="course"> 
       <div class="course1">
       <img src="../assets/u34.png"/>
+      <router-link to="/stumenus/publicclass" tag="h1">课程名称</router-link>
+      <p>这里是课程简介，显示2行文字，溢出时，显示文字的最后一个汉字替换成...</p>
+      <h5>讲师：胡文飞</h5>
+    </div>
+    <div class="course1">
+      <img src="../assets/u34.png"/>
+      <h1>课程名称</h1>
+      <p>这里是课程简介，显示2行文字，溢出时，显示文字的最后一个汉字替换成...</p>
+      <h5>讲师：胡文飞</h5>
+    </div>
+    <div class="course1">
+      <img src="../assets/u34.png"/>
+      <h1>课程名称</h1>
+      <p>这里是课程简介，显示2行文字，溢出时，显示文字的最后一个汉字替换成...</p>
+      <h5>讲师：胡文飞</h5>
+    </div>
+    <div class="course1">
+      <img src="../assets/u34.png"/>
+      <h1>课程名称</h1>
+      <p>这里是课程简介，显示2行文字，溢出时，显示文字的最后一个汉字替换成...</p>
+      <h5>讲师：胡文飞</h5>
+    </div>
+    <div class="course1">
+      <img src="../assets/u34.png"/>
       <h1>课程名称</h1>
       <p>这里是课程简介，显示2行文字，溢出时，显示文字的最后一个汉字替换成...</p>
       <h5>讲师：胡文飞</h5>
@@ -64,8 +88,28 @@
       <p>这里是课程简介，显示2行文字，溢出时，显示文字的最后一个汉字替换成...</p>
       <h5>讲师：胡文飞</h5>
     </div>
+    <div class="course1">
+      <img src="../assets/u34.png"/>
+      <h1>课程名称</h1>
+      <p>这里是课程简介，显示2行文字，溢出时，显示文字的最后一个汉字替换成...</p>
+      <h5>讲师：胡文飞</h5>
     </div>
-    
+    <div class="course1">
+      <img src="../assets/u34.png"/>
+      <h1>课程名称</h1>
+      <p>这里是课程简介，显示2行文字，溢出时，显示文字的最后一个汉字替换成...</p>
+      <h5>讲师：胡文飞</h5>
+    </div>
+    <div class="course1">
+      <img src="../assets/u34.png"/>
+      <h1>课程名称</h1>
+      <p>这里是课程简介，显示2行文字，溢出时，显示文字的最后一个汉字替换成...</p>
+      <h5>讲师：胡文飞</h5>
+    </div>
+    </div>
+    <div class="bottom">
+      <P>中科安高（北京）科技有限公司技术支持</P>
+    </div>
   </div>
 </template>
 
@@ -77,48 +121,38 @@ export default {
       options1: [
         {
           value: "1",
-          label: "大数据",
+          label: "IT互联网",
         },
         {
           value: "2",
-          label: "java",
+          label: "物联网",
         },
-        {
-          value: "3",
-          label: "人工智能",
-        },
-        {
-          value: "4",
-          label: "web",
-        },
+        
       ],
       options2: [
         {
           value: "1",
-          label: "html",
+          label: "大数据",
         },
         {
           value: "2",
-          label: "css",
+          label: "后端开发",
         },
         {
           value: "3",
-          label: "js",
+          label: "前端开发",
         },
       ],
       options3: [
         {
           value: "1",
-          label: "html",
+          label: "html/css",
         },
         {
           value: "2",
-          label: "css",
+          label: "javascript",
         },
-        {
-          value: "3",
-          label: "js",
-        },
+        
       ],
       value1: "",
       value2: "",
@@ -132,11 +166,14 @@ export default {
 .allcourses {
   margin-top: 20px;
   width: 100%;
+  background-color: #f3f5f7;
+  cursor: pointer;
   .center {
     background-color: #fff;
     width: 100%;
-    height: 20px;
+    height: 30px;
     padding: 20px;
+    margin-top:10px;
     .el-row {
       span {
         font-size: 14px;
@@ -150,24 +187,48 @@ export default {
     }
   }
   .course{
-    width:225px;
-    height:270px;
-    background-color: #fff;
-    margin:20px 0  0 20px ;
+    // margin-top:20px;
     display:flex;
+    justify-content: space-between;
+      flex-wrap: wrap;
+      display: flex;
+      flex-direction: row;
+      
+    .course1{
+      width:225px;
+      height:250px;
+      background-color: #fff;
+      margin-top:20px;
+      // margin:10px 0  0 10px ;
+      
+    }
     h1{
-      margin-top:5px;
+      margin:10px 0 0 10px;
       font-weight: normal;
       font-size:16px;
     }
     p{
-      margin-top:10px;
+      margin:10px 0 0 10px;
       font-size:12px;
+      color: #999999;
     }
     h5{
-      margin-top:10px;
+      margin:10px 0 0 10px;
       font-weight: normal;
+      font-size:12px;
     }
   }
+  .bottom{
+  width: 100%;
+    height: 30px;
+    background-color: rgba(53, 55, 58, 1);
+    display: flex;
+    margin-top:300px;
+    p{
+      color:#fff;
+      font-size: 13px;
+      margin:5px 0 0 30px ;
+    }
+}
 }
 </style>
