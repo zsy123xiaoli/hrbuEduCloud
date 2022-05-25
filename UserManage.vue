@@ -3,14 +3,15 @@
         <p>用户管理</p>
         <el-row>
             <el-button type="primary" size="medium">新增用户</el-button>
-            <el-button size="medium" @click="resetPassword" :disabled="false">重置密码</el-button>
-            <el-button size="medium" :disabled="true">禁用</el-button>
-            <el-button size="medium" :disabled="true">激活</el-button>
+            <el-button size="medium" @click="resetPassword" :disabled="!multipleSelection.length">重置密码</el-button>
+            <el-button size="medium" @click="disable(0)" :disabled="!multipleSelection.length">禁用</el-button>
+            <el-button size="medium" @click="disable(1)" :disabled="!multipleSelection.length">激活</el-button>
+            <!-- <el-button size="medium" @click="activate" :disabled="!multipleSelection.length">激活</el-button> -->
         </el-row>
         <div class="content">
             <el-row>
                 <span>用户状态</span>
-                <el-select v-model="value" size="medium/small/mini	" clearable placeholder="请选择">
+                <el-select v-model="userState" size="medium/small/mini	" clearable placeholder="请选择">
                     <el-option
                     v-for="item in options"
                     :key="item.value"
@@ -21,16 +22,16 @@
                 <span class="ml20">创建日期</span>
                 <el-date-picker
                     size="small"
-                    v-model="value1"
+                    v-model="time"
                     type="daterange"
                     range-separator="至"
                     start-placeholder="开始日期"
                     end-placeholder="结束日期">
                 </el-date-picker>
                 <span class="ml20">关键字</span>
-                <el-input placeholder="请输入内容" v-model="input" clearable>
+                <el-input placeholder="请输入内容" v-model="searchInput" clearable>
                 </el-input>
-                <el-button type="primary" size="medium">搜索</el-button>
+                <el-button @click="search" type="primary" size="medium">搜索</el-button>
             </el-row>
             <el-table
                 ref="multipleTable"
@@ -41,6 +42,7 @@
                 <el-table-column type="selection" width="60"></el-table-column>
                 <el-table-column prop="username" label="用户名" width="100"></el-table-column>
                 <el-table-column prop="gender" label="性别" width="80"></el-table-column>
+                <el-table-column prop="email" label="邮箱" width="220"></el-table-column>
                 <el-table-column prop="state" label="状态" width="80"></el-table-column>
                 <el-table-column prop="ts" label="创建时间" width="200"></el-table-column>
             </el-table>
@@ -64,44 +66,62 @@
 import axios from "axios";
 // 引入 dayjs
 import dayjs from "dayjs";
+
 export default {
     name: "UserManage",
     data() {
         return {
             options: [{
-                value: '1',
+                value: 2,
                 label: '全部'
                 }, {
-                value: '2',
+                value: 1,
                 label: '有效'
                 }, {
-                value: '0',
+                value: 0,
                 label: '禁用'
                 },
             ],
-            value: "",
-            value1: "",
-            input: "",
+            userState: 2,
+            time: "",
+            searchInput: "",
             tableData: [],
             multipleSelection: [],
             currentPage4: 4,
+            emailList:[],
         }
     },
     mounted(){
         //默认调用获取用户接口
+        this.getUserInfo();
+    },
+    methods: {
+        getUserInfo(data){
+        console.log("data",data);
+        //接口复用,判断有效参数再决定参数是否传递
+        const obj = {};
+        if(data){
+            obj.params = data;
+        } 
         axios
-        .get("/api/user/userinfo")
+        .get("/api/user/userinfo",obj)
         .then((response) => {
             // console.log(response);
             this.tableData = response.data.data;
-            console.log(this.tableData);
+            // console.log(this.tableData);
         })
         .catch((error) =>{
             console.log(error);
         })
-    },
-    methods: {
+        },
         handleSelectionChange(val){
+            //获取选中的邮箱
+            // this.emailList = [];
+            // val.forEach((item) => {
+            //     this.emailList.push(item.email);
+            // })
+            // console.log(this.emailList);
+            //存储当前选中的用户邮箱
             this.multipleSelection = val;
         },
         handleSizeChange(val) {
@@ -114,15 +134,22 @@ export default {
         resetPassword(){
             console.log(this.multipleSelection);
             // 拿ID
-            const userIdArr = []
+            const userIdArr = [];
+            const emailList = [];
             this.multipleSelection.forEach((item) => {
-                userIdArr.push(item.id);
+                //如果用户禁用则不向后台发送用户数据
+                if (item.state == "有效"){
+                    userIdArr.push(item.id);
+                    emailList.push(item.email);
+                }
             })
+            console.log(userIdArr,emailList);
         //重置密码接口
         axios
         .post("/api/user/resetpassword",{
             //传递用户ID参数到后台
-            userIds: userIdArr
+            userIds: userIdArr,
+            emailList,
         })
         .then((response) => {
             console.log(response);
@@ -130,6 +157,72 @@ export default {
         .catch((error) =>{
             console.log(error);
         })
+        },
+        //禁用账户
+        disable(state){
+            // 拿ID
+            const userIdArr = [];
+            this.multipleSelection.forEach((item) => {
+                //如果用户禁用则不向后台发送用户数据
+                if (item.state == "有效" && !state){
+                    userIdArr.push(item.id);
+                }else if (item.state == "禁用" && state) {
+                    userIdArr.push(item.id);
+                }
+            })
+            axios
+            .post("/api/user/disableOractivatedUser",{
+                //传递用户ID参数到后台
+                userIds: userIdArr,
+                state,
+            })
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) =>{
+                console.log(error);
+            })
+            },
+        // activate(){
+        //                 // 拿ID
+        //     const userIdArr = [];
+        //     this.multipleSelection.forEach((item) => {
+        //         //如果用户禁用则不向后台发送用户数据
+        //         if (item.state == "禁用"){
+        //             userIdArr.push(item.id);
+        //         }
+        //     })
+        // axios
+        // .post("/api/user/disableOractivatedUser",{
+        //     //传递用户ID参数到后台
+        //     userIds: userIdArr,
+        //     state: 1,
+        // })
+        // .then((response) => {
+        //     console.log(response);
+        // })
+        // .catch((error) =>{
+        //     console.log(error);
+        // })
+        // },
+        search(){
+            const data = {};
+            if(this.userState == 1 || this.userState == 0){
+                data.userState = this.userState;
+            }
+            if(this.time){
+                data.startTime = dayjs(this.time[0]).format("YYYY-MM-DD HH:mm:ss");
+                data.endTime = dayjs(this.time[1]).format("YYYY-MM-DD HH:mm:ss");
+            }
+            if(this.searchInput){
+                data.searchInput = this.searchInput;
+            }
+            // console.log("用户状态！",this.userState);
+            // console.log("用户注册时间！",this.time);
+            // console.log("用户注册时间！",dayjs(this.time[0]).format("YYYY-MM-DD HH:mm:ss"));
+            // console.log("用户模糊搜素字段！",this.searchInput);
+            // console.log(data);
+            this.getUserInfo(data);
         },
     },
 }
