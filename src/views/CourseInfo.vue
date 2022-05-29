@@ -64,7 +64,7 @@ export default {
       multipleSelection: [],
       arr: [AddClass],
       num: 0,
-      text:"",
+      text: "",
     };
   },
 
@@ -148,7 +148,7 @@ export default {
     width: 894px;
     height: 59px;
     display: flex;
-    background: rgb(242 242 242);
+    background: #f3f5f7;
     margin: 10px 0;
     padding: 10px;
     text-align: none;
