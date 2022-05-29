@@ -8,7 +8,7 @@
         <li>系统管理</li>
         <router-link to="/AdmMenus/StuManage" tag="li">教务管理</router-link>
         <li>资源库</li>
-        <li>教研管理</li>
+        <router-link to="/AdmMenus/curriculumdesign" tag="li">教研管理</router-link>
         <li>教学管理</li>
         <li>考试测评</li>
       </ul>
@@ -27,7 +27,7 @@
 <script>
 export default {
 
-    name:"Admindex"
+    name:"AdmIndex"
 
 }
 </script>
