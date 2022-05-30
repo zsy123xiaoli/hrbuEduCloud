@@ -9,6 +9,13 @@ import StudentAdd from "../views/StudentAdd.vue"
 import StudentInfo from "../views/StudentInfo.vue"
 import StudentEdit from "../views/StudentEdit.vue"
 import Teamanage from "../views/Teamanage.vue"
+import TeaAdd from "../views/TeaAdd.vue"
+import TeaInfo from "../views/TeaInfo.vue"
+import TeaEdit from "../views/TeaEdit.vue"
+import Clamanage from "../views/Clamanage.vue"
+import ClaAdd from "../views/ClaAdd.vue"
+
+
 import StudentIndex from "../views/StudentIndex.vue"
 import StuMenus from "../components/StuMenus.vue"
 import AllCourses from "../views/AllCourses.vue"
@@ -82,7 +89,6 @@ export default new VueRouter({
                     name: "StudentInfo",
                     component: StudentInfo,
 
-
                 },
                 {
                     path: "StudentEdit",
@@ -93,12 +99,40 @@ export default new VueRouter({
                     path: "Teamanage",
                     name: "Teamanage",
                     component: Teamanage,
-                }, {
+
+                },
+                {
+                    path: "TeaAdd",
+                    name: "TeaAdd",
+                    component: TeaAdd,
+                },
+                {
+                    path: "TeaInfo",
+                    name: "TeaInfo",
+                    component: TeaInfo,
+                },
+                {
+                    path: "TeaEdit",
+                    name: "TeaEdit",
+                    component: TeaEdit,
+                },
+                {
+                    path: "Clamanage",
+                    name: "Clamanage",
+                    component: Clamanage,
+                },
+                {
+                    path: "ClaAdd",
+                    name: "ClaAdd",
+                    component: ClaAdd,
+                },
+                {
                     path: "curriculumdesign",
                     name: "CurriculumDesign",
                     component: CurriculumDesign,
                 },
                 {
+
                     path: "newcurriculum",
                     name: "NewCurriculum",
                     component: NewCurriculum,
@@ -134,22 +168,21 @@ export default new VueRouter({
                             name: "NewCurriculumHint2",
                             component: NewCurriculumHint2,
 
-                        }
+                        },
+
+
                     ]
-                }
-                , {
+                }, {
 
                     path: "courserelease",
                     name: "CourseRelease",
                     component: CourseRelease,
-                }
-                , {
+                }, {
 
                     path: "/paginaion",
                     name: "Paginaion",
                     component: Paginaion,
-                }
-                , {
+                }, {
                     path: "/course",
                     name: "Course",
                     component: Course,
@@ -164,6 +197,8 @@ export default new VueRouter({
             path: "/previewcourse",
             name: "PreviewCourse",
             component: PreviewCourse,
+
         }
+
     ]
 })

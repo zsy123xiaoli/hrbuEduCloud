@@ -5,26 +5,25 @@
       <p>学生管理</p>
       <el-row>
         <router-link to="/AdmMenus/StudentAdd">
-          <el-button type="primary" size="medium" @click="addStu"
+          <el-button type="primary" size="medium" 
             >新增学生*</el-button
           >
         </router-link>
         <el-button
           size="medium"
-          @click="rePassword"
+          @click="open2"
           :disabled="!multipleSelection.length"
           >重置密码</el-button
         >
-
         <el-button
           size="medium"
-          @click="disable"
+          @click="open"
           :disabled="!multipleSelection.length"
           >结课</el-button
         >
         <el-button
           size="medium"
-          @click="disable"
+          @click="open1"
           :disabled="!multipleSelection.length"
           >激活</el-button
         >
@@ -72,12 +71,12 @@
             >搜索</el-button
           >
         </el-row>
-
         <el-table
           ref="multipleTable"
           :data="tableData"
           tooltip-effect="dark"
           style="width: 100%"
+          :header-cell-style="{'text-align':'center'}"
           @cell-dblclick="LookIndex"
           @selection-change="handleSelectionChange"
         >
@@ -183,6 +182,7 @@ export default {
     this.getUserInfo();
   },
   methods: {
+    //显示用户信息请求
     getUserInfo() {
       axios
         .post("http://127.0.0.1:3000/api/system/user/login", {
@@ -210,7 +210,7 @@ export default {
         .then((response) => {
           console.log(response.data);
           response.data.message.map((item) => {
-            item.FORBIDDEN = item.FORBIDDEN === 1 ? "有效" : "结课";
+            item.FORBIDDEN = item.FORBIDDEN === 0 ? "有效" : "结课";
             item.SEX = item.SEX === 1 ? "男" : "女";
           });
           console.log(response.data.message);
@@ -220,35 +220,9 @@ export default {
           console.log(error);
         });
     },
-    addStu() {
-      console.log("新增学生");
-    },
-    // getuserInfo(data){
-    // console.log("data",data);
-
-    // const obj = {
-    //   params:{
-    //     pageNum: this.pageNum,
-    //     pageSize: this.pageSize
-    //   }
-    // }
-    // if(data){
-    //   obj.params = {...obj.params,...data};
-    // }
-
-    //   axios
-    //   .get("/api/user/userinfo",obj)
-    //   .then((response) => {
-    //     console.log(response);
-    //     this.tableData = response.data.data.results;
-    //     this.itemTotal=response.data.data.total;
-    //     console.log(response)
-
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    // },
+  
+   
+   //双击信息列表路由跳页
     LookIndex(val) {
       this.multipleSelection = val;
       //对时间戳进行处理后在路由传参
@@ -270,57 +244,77 @@ export default {
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
     },
-    rePassword() {
-      console.log(this.multipleSelection);
-      const data = {};
-      this.multipleSelection.forEach((item) => {
-        data.val(item.val);
-        data.num(2)
-
-      });
-      console.log(data);
-      axios
-        .post(
-          "http://127.0.0.1:3000/api/user/searchStudent",
-            data,        
-          {
-            headers: {
-              Authorization: localStorage.token,
-            },
-          }
-        )
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
+    open() {
+        this.$confirm('确认结课?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.disable()
+          this.$message({
+            type: 'success',
+            message: '结课成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消'
+          });          
         });
-    },
-    disable() {
-      const param = [];
-      const userId = [];
-      // const userId = {};
+      },
+      open1() {
+        this.$confirm('确认激活?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.active()
+          this.$message({
+            type: 'success',
+            message: '激活成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消'
+          });          
+        });
+      },
+      open2() {
+        this.$confirm('确认重置密码?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.rePassword()
+          this.$message({
+            type: 'success',
+            message: '重置成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消'
+          });          
+        });
+      },
+    //重置密码请求接口
+    rePassword() {
+      let students = '';
       this.multipleSelection.forEach((item) => {
-        console.log(item);
-        if (item.FORBIDDEN === "有效") {
-          // userId.userid=Number(item.ID);
-          userId.push(Number(item.ID));
-          // param.push(userId);
-          // console.log(typeof JSON.stringify(userId));
-          // return;
-        } else if (item.FORBIDDEN === "结课") {
-          userId.push(Number(item.ID));
-        }
-        param.push(userId);
+     
+          students+=item.ID+','+item.MAIL+';'
+        
       });
-      console.log(JSON.stringify(param))
+      //切掉最后的；
+      students=students.substring(0,students.length-1)
+      console.log(students)
       axios
         .post(
-          "http://127.0.0.1:3000/api/user/disableStudent",
-            JSON.stringify([[1001002]]),
+          "http://127.0.0.1:3000/api/user/remakeStudentPassword",
+            { students:students},
           {
-            headers: {
-              // 'Content-Type': 'application/json;',
+            headers: {      
                Authorization: localStorage.token,
             },
           }
@@ -331,8 +325,67 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-
+  
     },
+
+    //结课请求接口
+    disable() {
+      let students = '';
+      this.multipleSelection.forEach((item) => {
+        if (item.FORBIDDEN === "有效") {
+          students+=item.ID+';'
+        }
+      console.log(students)
+      });
+      axios
+        .post(
+          "http://127.0.0.1:3000/api/user/disableStudent",
+            { students:students},
+          {
+            headers: {      
+               Authorization: localStorage.token,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    this.getUserInfo();
+    },
+
+    //激活请求接口
+    active() {
+      let students = '';
+      this.multipleSelection.forEach((item) => {
+        if (item.FORBIDDEN === "结课") {
+          students+=item.ID+';'
+        } 
+      });
+      console.log(students)
+      axios
+        .post(
+          "http://127.0.0.1:3000/api/user/activateStudent",
+            { students:students},
+          {
+            headers: {
+        
+               Authorization: localStorage.token,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    this.getUserInfo();
+    },
+
+    //搜索请求接口
     search() {
       const data = {};
       //模糊搜索参数
