@@ -4,9 +4,10 @@
     <div class="content">
       <div class="header">
         <span>学生信息</span>
-        <el-button plain>修改密码</el-button>
-        <el-button plain>结课</el-button>
-        <el-button plain>激活</el-button>
+        <el-button plain @click="open2">重置密码</el-button>
+        <el-button plain  @click="open">结课</el-button>
+        
+        <el-button plain @click="open1">激活</el-button>
         <div class="primary">
           <div class="top">
             <img src="../assets/u4103.png" />
@@ -42,7 +43,7 @@
             <span class="i"></span><span class="title">状态信息</span>
              <ul>
               <li>
-                <span>状态</span><span>{{ $route.query.FORBIDDEN }}</span>
+                <span>状态</span><span class="state">{{ $route.query.FORBIDDEN }}</span>
               </li>
 
               <li>
@@ -57,6 +58,8 @@
 
 <script>
 import Slidemenus from "../components/Eduslidemenus.vue";
+import axios from "axios";
+
 import dayjs from "dayjs";
 
 export default {
@@ -66,16 +69,134 @@ export default {
     };
   },
   mounted() {
-
-    this.$route.query.TIMESTAMP = dayjs(new Date(Number(this.$route.query.TIMESTAMP))).format("YYYY-MM-DD HH:mm:ss")
-
-    console.log(this.data.TIMESTAMP)
     
-    console.log(this.data);
-  
+    //方便路由传参
     this.data=this.$route.query
+    console.log(this.data);
   },
   methods: {
+    open() {
+        this.$confirm('确认结课?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.disable()
+          this.$message({
+            type: 'success',
+            message: '结课成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消'
+          });          
+        });
+      },
+    open1() {
+        this.$confirm('确认激活?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.active()
+          this.$message({
+            type: 'success',
+            message: '激活成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消'
+          });          
+        });
+      },
+      open2() {
+        this.$confirm('确认重置密码?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.rePassword()
+          this.$message({
+            type: 'success',
+            message: '重置成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消'
+          });          
+        });
+      },
+     disable() {
+      let students = this.data.ID;
+      console.log(students)
+      axios
+        .post(
+          "http://127.0.0.1:3000/api/user/disableStudent",
+            { students:students},
+          {
+            headers: {      
+               Authorization: localStorage.token,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      document.querySelector(".state").innerHTML="结课"
+    },
+
+    //激活请求接口
+    active() {
+        let students = this.data.ID;
+
+      axios
+        .post(
+          "http://127.0.0.1:3000/api/user/activateStudent",
+            { students:students},
+          {
+            headers: {
+        
+               Authorization: localStorage.token,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+         document.querySelector(".state").innerHTML="激活"
+
+    },
+    rePassword() {
+      let students =data.ID+','+data.MAIL;
+      
+      console.log(students)
+      axios
+        .post(
+          "http://127.0.0.1:3000/api/user/remakeStudentPassword",
+            { students:students},
+          {
+            headers: {      
+               Authorization: localStorage.token,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  
+    },
     StudentEdit() {
       this.$router.push({
         name: "StudentEdit",
@@ -83,7 +204,9 @@ export default {
      
       });
     },
+
   },
+  
   components: { Slidemenus },
 };
 </script>

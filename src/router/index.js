@@ -9,6 +9,13 @@ import StudentAdd from "../views/StudentAdd.vue"
 import StudentInfo from "../views/StudentInfo.vue"
 import StudentEdit from "../views/StudentEdit.vue"
 import Teamanage from "../views/Teamanage.vue"
+import TeaAdd from "../views/TeaAdd.vue"
+import TeaInfo from "../views/TeaInfo.vue"
+import TeaEdit from "../views/TeaEdit.vue"
+import Clamanage from "../views/Clamanage.vue"
+import ClaAdd from "../views/ClaAdd.vue"
+
+
 import StudentIndex from "../views/StudentIndex.vue"
 import StuMenus from "../components/StuMenus.vue"
 import AllCourses from "../views/AllCourses.vue"
@@ -31,114 +38,144 @@ import AddClass from '../views/AddClass';
 
 export default new VueRouter({
     routes: [{
-            path: "/",
-            name: "MyLogin",
-            component: MyLogin
+        path: "/",
+        name: "MyLogin",
+        component: MyLogin
+    },
+    {
+        path: "/student",
+        name: "Studentindex",
+        component: StudentIndex,
+    },
+    {
+        path: "/StuMenus",
+        name: "StuMenus",
+        component: StuMenus,
+        children: [{
+            path: "AllCourses",
+            name: "AllCourses",
+            component: AllCourses,
         },
         {
-            path: "/student",
-            name: "Studentindex",
-            component: StudentIndex,
+            path: "PublicClass",
+            name: "PublicClass",
+            component: PublicClass,
+        },
+        ]
+    },
+
+    {
+        path: "/admin",
+        name: "Admindex",
+        component: Admindex,
+    },
+    {
+        path: "/AdmMenus",
+        name: "AdmMenus",
+        component: AdmMenus,
+        children: [{
+            path: "Stumanage",
+            name: "Stumanage",
+            component: Stumanage,
         },
         {
-            path: "/StuMenus",
-            name: "StuMenus",
-            component: StuMenus,
+            path: "StudentAdd",
+            name: "StudentAdd",
+            component: StudentAdd,
+        },
+        {
+
+            path: "StudentInfo",
+            name: "StudentInfo",
+            component: StudentInfo,
+
+        },
+        {
+            path: "StudentEdit",
+            name: "StudentEdit",
+            component: StudentEdit,
+        },
+        {
+            path: "Teamanage",
+            name: "Teamanage",
+            component: Teamanage,
+
+        },
+        {
+            path: "TeaAdd",
+            name: "TeaAdd",
+            component: TeaAdd,
+        },
+        {
+            path: "TeaInfo",
+            name: "TeaInfo",
+            component: TeaInfo,
+        },
+        {
+            path: "TeaEdit",
+            name: "TeaEdit",
+            component: TeaEdit,
+        },
+        {
+            path: "Clamanage",
+            name: "Clamanage",
+            component: Clamanage,
+        },
+        {
+            path: "ClaAdd",
+            name: "ClaAdd",
+            component: ClaAdd,
+        },
+        {
+            path: "curriculumdesign",
+            name: "CurriculumDesign",
+            component: CurriculumDesign,
+        },
+        {
+
+            path: "newcurriculum",
+            name: "NewCurriculum",
+            component: NewCurriculum,
             children: [{
-                    path: "AllCourses",
-                    name: "AllCourses",
-                    component: AllCourses,
-                },
-                {
-                    path: "PublicClass",
-                    name: "PublicClass",
-                    component: PublicClass,
-                },
-            ]
-        },
-
-        {
-            path: "/admin",
-            name: "Admindex",
-            component: Admindex,
-        },
-        {
-            path: "/AdmMenus",
-            name: "AdmMenus",
-            component: AdmMenus,
-            children: [{
-                    path: "Stumanage",
-                    name: "Stumanage",
-                    component: Stumanage,
-                },
-                {
-                    path: "StudentAdd",
-                    name: "StudentAdd",
-                    component: StudentAdd,
-                },
-                {
-
-                    path: "StudentInfo",
-                    name: "StudentInfo",
-                    component: StudentInfo,
-
-
-                },
-                {
-                    path: "StudentEdit",
-                    name: "StudentEdit",
-                    component: StudentEdit,
-                },
-                {
-                    path: "Teamanage",
-                    name: "Teamanage",
-                    component: Teamanage,
-                }, {
-                    path: "curriculumdesign",
-                    name: "CurriculumDesign",
-                    component: CurriculumDesign,
-                },
-                {
-                    path: "newcurriculum",
-                    name: "NewCurriculum",
-                    component: NewCurriculum,
+                path: "setcourse",
+                name: "SetCourse",
+                component: SetCourse,
+            },
+            {
+                path: "addcourse",
+                name: "AddCourse",
+                component: AddCourse,
+                children: [{
+                    path: "courseinfo",
+                    name: "CourseInfo",
+                    component: CourseInfo,
                     children: [{
-                            path: "setcourse",
-                            name: "SetCourse",
-                            component: SetCourse,
-                        },
-                        {
-                            path: "addcourse",
-                            name: "AddCourse",
-                            component: AddCourse,
-                            children: [{
-                                path: "courseinfo",
-                                name: "CourseInfo",
-                                component: CourseInfo,
-                                children: [{
-                                    path: "addclass",
-                                    name: "AddClass",
-                                    component: AddClass,
-                                }]
-                            }]
+                        path: "addclass",
+                        name: "AddClass",
+                        component: AddClass,
+                    }]
+                }]
 
-                        },
-                        {
-                            path: "newcurriculumhint1",
-                            name: "NewCurriculumHint1",
-                            component: NewCurriculumHint1,
+            },
+            {
+                path: "newcurriculumhint1",
+                name: "NewCurriculumHint1",
+                component: NewCurriculumHint1,
 
-                        },
-                        {
-                            path: "newcurriculumhint2",
-                            name: "NewCurriculumHint2",
-                            component: NewCurriculumHint2,
+            },
+            {
+                path: "newcurriculumhint2",
+                name: "NewCurriculumHint2",
+                component: NewCurriculumHint2,
 
-                        }
-                    ]
-                }
+            }
+
 
             ]
+
+        }
+
+        ]
         }
     ]
 })

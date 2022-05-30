@@ -1,8 +1,8 @@
 <template slot-scope="scope">
-  <div class="studentinfo">
-    <div class="student">
+  <div class="ClaAdd">
+    <div class="class">
       <Slidemenus></Slidemenus>
-      <div class="StudentInfo">
+      <div class="claadd">
         <span class="i"></span><span class="title">基本信息</span>
         <el-row>
           <span> 所属院校*</span>
@@ -41,18 +41,26 @@
         </el-row>
 
         <el-row>
-          <span> 所属班级</span>
-          <el-input
-            placeholder="请输入内容"
-            v-model="Classinput"
-            size="medium"
-            clearable
+          <span> 办学层次*</span>
+          <el-select
+    
+          @click.native="getDepartment"
+            v-model="DEPARTMENT"
             style="width: 358px"
+            :popper-append-to-body="false"
+            placeholder="请选择"
           >
-          </el-input>
+            <el-option
+              v-for="item in major"
+              :key="item.value"
+              :label="item.label"
+              :value="item.DEPARTMENT"
+            >
+            </el-option>
+          </el-select>
         </el-row>
         <el-row>
-          <span> 学籍号</span>
+          <span> 班级名称</span>
           <el-input
             v-model="Roolinput"
             placeholder="请输入内容"
@@ -60,42 +68,8 @@
           ></el-input>
         </el-row>
 
-        <el-row>
-          <span> 姓名</span>
-          <el-input
-            v-model="Nameinput"
-            placeholder="请输入内容"
-            style="width: 358px"
-          ></el-input>
-        </el-row>
-        <el-row>
-          <span> 性别</span>
-          <el-select
-            :popper-append-to-body="false"
-
-            v-model="genderval"
-            style="width: 358px"
-            placeholder="请选择"
-          >
-            <el-option
-              v-for="item in gender"
-              :key="item.value"
-              :label="item.label"
-              :value="item.genderval"
-            >
-            </el-option>
-          </el-select>
-        </el-row>
-
-        <el-row>
-          <span> 邮箱</span>
-          <el-input
-         
-            v-model="Emallinput"
-            placeholder="请输入内容"
-            style="width: 358px"
-          ></el-input>
-        </el-row>
+     
+            
         <div class="button">
           <el-button type="primary" @click="save">新增</el-button>
           <el-button>取消</el-button>
@@ -196,6 +170,9 @@ export default {
               alert("添加成功")
               return
             }
+           
+
+
         })
         .catch(function (error) {
             console.log(error);
@@ -236,14 +213,14 @@ export default {
 //   padding: 0;
 //   margin: 0;
 // }
-.studentinfo {
+.ClaAdd {
   background-color: #f3f5f7;
 
-  .student {
+  .class {
     display: flex;
     // margin-left: 20px;
     width: 1250px;
-    .StudentInfo {
+    .claadd {
       margin: 0 auto;
       .i {
         height: 50px;

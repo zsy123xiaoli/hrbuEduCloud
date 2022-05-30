@@ -3,8 +3,10 @@
     <Slidemenus></Slidemenus>
     <div class="content">
       <div class="header">
-        <span>学生信息</span>
-   
+        <span>教师信息</span>
+        <el-button plain>修改密码</el-button>
+        <el-button plain>结课</el-button>
+        <el-button plain>激活</el-button>
         <div class="primary">
           <div class="top">
             <img src="../assets/u4103.png" />
@@ -14,41 +16,13 @@
             <span class="i"></span><span class="title">基本信息</span>
             <ul>
               <li>
-                <span>所属院校*</span>
-                <el-select
-                  v-model="SCHOOL"
-                  style="width: 358px"
-              
-                  placeholder="请选择"
-                >
-                  <el-option
-                    v-for="item in school"
-                    :key="item.value"
-                    :value="item.SCHOOL"
-                  >
-                  </el-option>
-                </el-select>
+                <span>用户名</span><span>{{ $route.query.SCHOOL }}</span>
               </li>
               <li>
-                <span>所属专业*</span>
-                <el-select
-                  @click.native="getDepartment"
-                  v-model="DEPARTMENT"
-                  style="width: 358px"
-
-                  placeholder="请选择"
-                >
-                  <el-option
-                    v-for="item in major"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.DEPARTMENT"
-                  >
-                  </el-option>
-                </el-select>
+                <span>姓名</span><span>{{ $route.query.SCHOOL }}</span>
               </li>
               <li>
-                <span>所属班级</span>
+                <span>邮箱</span>
                 <el-input
                   placeholder="请输入内容"
                   v-model="Classinput"
@@ -60,32 +34,8 @@
               </li>
 
               <li>
-                <span>学籍号</span>
-                <el-input
-                  placeholder="请输入内容"
-                  v-model="Roolinput"
-                  size="medium"
-                  clearable
-                  style="width: 358px"
-                >
-                </el-input>
-              </li>
-              <li>
-                <span>姓名</span>
-                <el-input
-                  placeholder="请输入内容"
-                  v-model="Nameinput"
-                  size="medium"
-                  clearable
-                  style="width: 358px"
-                >
-                </el-input>
-              </li>
-
-              <li>
-                <span>性别</span
-                ><el-select
-    
+                <span>所属院校</span>
+                <el-select
                   v-model="SEX"
                   style="width: 358px"
                   placeholder="请选择"
@@ -99,21 +49,51 @@
                   </el-option>
                 </el-select>
               </li>
+              <li>
+                
+                <span> 所属班级</span>
+          <el-checkbox
+            :indeterminate="isIndeterminate"
+            v-model="checkAll"
+            size="medium"
+            @change="handleCheckAllChange"
+            >全选</el-checkbox
+          >
+          <div style="margin: 15px 0"></div>
+          <el-checkbox-group
+            v-model="checkedCities"
+            @change="handleCheckedCitiesChange"
+          >
+            <el-checkbox v-for="city in cities" :label="city" :key="city">
+            {{city}}
+            </el-checkbox>
+          </el-checkbox-group>
+              </li>
 
               <li>
-                <span>邮箱</span>
-                <el-input
-     
-            v-model="Emallinput"
-            placeholder="请输入内容"
-            style="width: 358px"
-          ></el-input>
+                <span> 所属班级</span>
+          <el-checkbox
+            :indeterminate="isIndeterminate"
+            v-model="checkAll"
+            size="medium"
+            @change="handleCheckAllChange"
+            >全选</el-checkbox
+          >
+          <div style="margin: 15px 0"></div>
+          <el-checkbox-group
+            v-model="checkedCities"
+            @change="handleCheckedCitiesChange"
+          >
+            <el-checkbox v-for="city in cities" :label="city" :key="city">
+            {{city}}
+            </el-checkbox>
+          </el-checkbox-group>
               </li>
             </ul>
             <div class="button">
-          <el-button type="primary" >保存</el-button>
-          <el-button>取消</el-button>
-        </div>
+              <el-button type="primary">保存</el-button>
+              <el-button>取消</el-button>
+            </div>
           </div>
         </div>
       </div>
@@ -124,6 +104,7 @@
 <script>
 import Slidemenus from "../components/Eduslidemenus.vue";
 import axios from "axios";
+const cityOptions = ["上海", "北京", "广州", "深圳", "广州", "深圳"];
 
 export default {
   data() {
@@ -135,12 +116,18 @@ export default {
       major: [],
       DEPARTMENT: "",
       //性别信息
-      gender: [{SEX:"男"},{SEX:"女"}],
+      gender: [{ SEX: "男" }, { SEX: "女" }],
       SEX: "",
-       Classinput: "",
+      Classinput: "",
       Roolinput: "",
       Nameinput: "",
       Emallinput: "",
+      checkAll: false,
+
+      checkedCities: ["上海"],
+      cities: cityOptions,
+      //全选
+      isIndeterminate: true,
     };
   },
   mounted() {
@@ -152,29 +139,45 @@ export default {
     this.Nameinput = this.$route.query.NAME;
     this.Emallinput = this.$route.query.MAIL;
   },
-  methods:{
-    getDepartment(){
-       let school=""
-   school=this.SCHOOL
-      console.log(school)
-       axios
-      .get("http://127.0.0.1:3000/api/system/user/getSchoolDepartment",{params:{
-        school
-      }},{
+  methods: {
+     handleCheckAllChange(val) {
+      this.checkedCities = val ? cityOptions : [];
+      this.isIndeterminate = false;
+    },
+    handleCheckedCitiesChange(value) {
+      let checkedCount = value.length;
+      this.checkAll = checkedCount === this.cities.length;
+      this.isIndeterminate =
+        checkedCount > 0 && checkedCount < this.cities.length;
+    },
+    getDepartment() {
+      let school = "";
+      school = this.SCHOOL;
+      console.log(school);
+      axios
+        .get(
+          "http://127.0.0.1:3000/api/system/user/getSchoolDepartment",
+          {
+            params: {
+              school,
+            },
+          },
+          {
             headers: {
-            'Authorization': localStorage.token,
-        }
+              Authorization: localStorage.token,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+          console.log(response.data.message);
+          this.major = response.data.message;
         })
-      .then((response) => {
-        console.log(response);
-        console.log(response.data.message )
-        this.major=response.data.message 
-        
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    }
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    
   },
   components: { Slidemenus },
 };
@@ -230,13 +233,13 @@ export default {
           margin-right: 650px;
         }
         li {
-          margin: 40px 0 55px 0;
+          margin: 40px 0 55px 66px;
 
           span {
             &:first-child {
               font-size: 14px;
               color: #7a7f85;
-              margin: 30px 20px 0 66px;
+              margin-right: 20px;
             }
             &:nth-child(2) {
               font-size: 14px;
@@ -245,12 +248,18 @@ export default {
             }
           }
         }
-         .button {
-        width: 90px;
-        margin: 0 auto;
-        display: flex;
+        .el-checkbox-group{
+          width:300px;
+          margin-left: 76px;
+          /deep/ .el-checkbox{
+              margin-right:70px
+          }
       }
-       
+        .button {
+          width: 90px;
+          margin: 0 auto;
+          display: flex;
+        }
       }
     }
   }
