@@ -46,7 +46,7 @@
         <div class="courserwareselect">
           <span>课件</span>
           <el-row>
-            <el-button type="primary" size="mini">从资源库选取</el-button>
+            <el-button type="primary" size="mini" @click="selectaddclass()">从资源库选取</el-button>
           </el-row>
         </div>
         <div class="coursewarename">
@@ -71,13 +71,13 @@
               </div>
             </el-button>
           </el-row>
-          <b> 可添加课件型、附件型或链接型参考资料，最多可添加5个 </b>
+          <s> 可添加课件型、附件型或链接型参考资料，最多可添加5个 </s>
         </div>
         <div class="link">
           <ul>
             <li>
               <i class="el-icon-video-play"></i>
-              <b>课件名称</b>
+              <b >课件名称</b>
               <i class="el-icon-close cancel" @click="del()"></i>
             </li>
             <li>
@@ -94,7 +94,7 @@
         </div>
       </div>
       <!-- 保存默认为禁用class="el-button el-button--default"，输入框失焦后为可用type="primary" -->
-      <el-row>
+      <el-row class="left80">
         <el-button
           class="el-button--default"
           size="mini"
@@ -108,8 +108,12 @@
 </template>
 
 <script>
+// import SelectAddclass from "./SelectAddclass";
+
 export default {
   name: "AddClass",
+
+//   components: { SelectAddclass },
 
   data() {
     return {
@@ -219,6 +223,19 @@ export default {
       font-size: 12px;
       color: #999999;
     }
+    b:hover {
+      color: #017ebd;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    s {
+      margin: 5px 15px 0;
+      font-family: "微软雅黑";
+      font-weight: 400;
+      text-decoration: none;
+      font-size: 12px;
+      color: #999999;
+    }
     .cancel {
       cursor: pointer;
     }
@@ -324,14 +341,19 @@ export default {
           display: flex;
           justify-content: left;
           flex-wrap: wrap;
-          li{
-              margin:5px 500px 5px 80px;
+          li {
+            margin: 5px 500px 5px 80px;
           }
         }
       }
     }
-    .el-row {
-        margin-left: 80px;
+    // .el-row {
+    //   .el-button {
+    //     margin-left: 20px;
+    //   }
+    // }
+    .left80 {
+      margin-left: 80px;
     }
   }
 }

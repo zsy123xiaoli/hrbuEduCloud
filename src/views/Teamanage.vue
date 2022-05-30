@@ -150,6 +150,7 @@ import Slidemenus from "../components/Eduslidemenus.vue";
 export default {
     data() {
     return {
+      
       State: [
         {
           value: 2,

@@ -1,6 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from "./router/index"
+
+import Video from "video.js";
+import "video.js/dist/video-js.min.css"
+Vue.prototype.$video = Video
+
+
 //按需引入element-ui
 import {
   Input,

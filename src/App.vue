@@ -1,16 +1,17 @@
 <template>
   <div id="app">
+    <!-- <MyLogin/> -->
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import MyLogin from "./views/MyLogin.vue";
+// import MyLogin from "./views/MyLogin.vue";
 
 export default {
   name: "App",
   components: {
-    MyLogin,
+    // MyLogin,
   },
 };
 </script>

@@ -21,11 +21,11 @@ import NewCurriculumHint1 from '../views/NewCurriculumHint1';
 import NewCurriculumHint2 from '../views/NewCurriculumHint2';
 import CourseInfo from '../views/CourseInfo';
 import AddClass from '../views/AddClass';
-
-
-
-
-
+import SelectAddclass from '../views/SelectAddclass';
+import Paginaion from '../views/Paginaion';
+import Course from '../views/Course';
+import PreviewCourse from '../views/PreviewCourse';
+import CourseRelease from '../views/CourseRelease';
 
 
 
@@ -137,8 +137,33 @@ export default new VueRouter({
                         }
                     ]
                 }
+                , {
 
+                    path: "courserelease",
+                    name: "CourseRelease",
+                    component: CourseRelease,
+                }
+                , {
+
+                    path: "/paginaion",
+                    name: "Paginaion",
+                    component: Paginaion,
+                }
+                , {
+                    path: "/course",
+                    name: "Course",
+                    component: Course,
+
+                },
             ]
+        }, {
+            path: "/selectaddclass",
+            name: "SelectAddclass",
+            component: SelectAddclass,
+        }, {
+            path: "/previewcourse",
+            name: "PreviewCourse",
+            component: PreviewCourse,
         }
     ]
 })
