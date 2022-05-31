@@ -4,7 +4,7 @@
     <div class="center">
       <el-row>
         <span>根据分类选择</span>
-        <el-select v-model="value1" placeholder="全部">
+        <el-select v-model="value1" filterable placeholder="全部">
           <el-option
             v-for="item in options1"
             :key="item.value"
@@ -13,7 +13,7 @@
           >
           </el-option>
         </el-select>
-        <el-select v-model="value2" placeholder="请选择二级分类">
+        <el-select v-model="value2" filterable placeholder="请选择二级分类">
           <el-option
             v-for="item in options2"
             :key="item.value"
@@ -22,7 +22,7 @@
           >
           </el-option>
         </el-select>
-        <el-select v-model="value3" placeholder="请选择三级分类">
+        <el-select v-model="value3" filterable placeholder="请选择三级分类">
           <el-option
             v-for="item in options3"
             :key="item.value"

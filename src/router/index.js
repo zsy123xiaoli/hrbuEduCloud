@@ -9,11 +9,14 @@ import StudentAdd from "../views/StudentAdd.vue"
 import StudentInfo from "../views/StudentInfo.vue"
 import StudentEdit from "../views/StudentEdit.vue"
 import Teamanage from "../views/Teamanage.vue"
+
 import TeaAdd from "../views/TeaAdd.vue"
 import TeaInfo from "../views/TeaInfo.vue"
 import TeaEdit from "../views/TeaEdit.vue"
 import Clamanage from "../views/Clamanage.vue"
 import ClaAdd from "../views/ClaAdd.vue"
+
+
 import StudentIndex from "../views/StudentIndex.vue"
 import StuMenus from "../components/StuMenus.vue"
 import AllCourses from "../views/AllCourses.vue"
@@ -26,6 +29,7 @@ import NewCurriculumHint1 from '../views/NewCurriculumHint1';
 import NewCurriculumHint2 from '../views/NewCurriculumHint2';
 import CourseInfo from '../views/CourseInfo';
 import AddClass from '../views/AddClass';
+
 import SelectAddclass from '../views/SelectAddclass';
 import Paginaion from '../views/Paginaion';
 import Course from '../views/Course';
@@ -34,6 +38,17 @@ import CourseRelease from '../views/CourseRelease';
 import MeasurementManagement from '../views/MeasurementManagement';
 import TestMain from '../views/TestMain';
 import NewTest from '../views/NewTest';
+
+import CourseStudy from "../views/CourseStudy.vue"
+import MyClass from "../views/MyClass.vue"
+import DataSet from "../views/DataSet.vue"
+import ChangePassword from "../views/ChangePassword.vue"
+
+
+
+
+
+
 
 
 export default new VueRouter({
@@ -61,9 +76,29 @@ export default new VueRouter({
                     name: "PublicClass",
                     component: PublicClass,
                 },
+                {
+                    path:"MyClass",
+                    name:"MyClass",
+                    component:MyClass,
+                },
+                {
+                    path:"DataSet",
+                    name:"DataSet",
+                    component:DataSet,
+                },
+                {
+                    path:"ChangePassword",
+                    name:"ChangePassword",
+                    component:ChangePassword,
+                },
             ]
         },
-
+        {
+            path:"/CourseStudy",
+            name:"CourseStudy",
+            component:CourseStudy,
+        },
+       
         {
             path: "/admin",
             name: "Admindex",

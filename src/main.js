@@ -9,7 +9,40 @@ Vue.prototype.$video = Video
 
 //按需引入element-ui
 
-import { Input,Button,Row, Select, Option, DatePicker, Table, TableColumn, Pagination ,Checkbox,CheckboxGroup,MessageBox,Message,Cascader,Breadcrumb,BreadcrumbItem,Upload,Link,} from 'element-ui';
+
+
+
+
+import {
+  Input,
+  Button,
+  Row,
+  Select,
+  Option,
+  DatePicker,
+  Table,
+  TableColumn,
+  Pagination,
+  Checkbox,
+  Message,
+  Cascader,
+  Breadcrumb,
+  BreadcrumbItem,
+  Upload,
+  Link,
+  Avatar,
+  PageHeader,
+  Collapse,
+  CollapseItem,
+  Form,
+  FormItem,
+  Radio,
+
+  RadioGroup,
+  CheckboxGroup,
+  MessageBox
+
+} from 'element-ui';
 
 Vue.use(Input)
 Vue.use(Button)
@@ -27,6 +60,18 @@ Vue.use(Breadcrumb);
 Vue.use(BreadcrumbItem);
 Vue.use(Upload);
 Vue.use(Link);
+Vue.use(Avatar);
+Vue.use(PageHeader);
+Vue.use(Collapse);
+Vue.use(CollapseItem);
+Vue.use(Form);
+Vue.use(FormItem);
+Vue.use(Radio);
+Vue.use(RadioGroup);
+
+
+
+
 
 
 // Vue.use(MessageBox);

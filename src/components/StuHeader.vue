@@ -10,7 +10,7 @@
           <li>考试测评</li>
    </ul>
    <ul class="unlogin">
-          <li>学生姓名</li>
+          <router-link to="/StuMenus/myclass" tag="li">学生姓名</router-link>
           <li>帮助</li>
           <li>退出</li>
       </ul>
