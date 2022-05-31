@@ -60,7 +60,7 @@
           <el-input placeholder="请输入内容" v-model="input" clearable>
           </el-input>
           <el-row>
-            <el-button type="primary">主要按钮</el-button>
+            <el-button type="primary">查询</el-button>
           </el-row>
         </div>
       </div>
@@ -80,7 +80,20 @@ export default {
   components: { TeachingMenus, Paginaion, Course },
 
   data() {
-    return {};
+    return {
+      options: [
+        {
+          value: "选项1",
+          label: "黄金糕",
+        },
+        {
+          value: "选项2",
+          label: "双皮奶",
+        },
+      ],
+      value: "",
+      input: "",
+    };
   },
 
   mounted() {},
@@ -102,14 +115,73 @@ export default {
     }
     .content {
       width: 980px;
-      height: 145px;
+      // height: 145px;
       background-color: #fff;
       border-radius: 6px;
-      .classification{
-          display: flex;
+      display: flex;
+      flex-wrap: wrap;
+      p {
+        width: 60px;
+        height: 34px;
+        line-height: 34px;
+        text-align: right;
+        margin: 0 20px;
       }
-      .promulgator{
-          display: flex;
+      .classification {
+        display: flex;
+        height: 34px;
+        margin: 20px 0 13px;
+
+        .el-select {
+          width: 196px;
+          height: 34px;
+          margin-right: 10px;
+        }
+      }
+      .promulgator {
+        display: flex;
+        height: 34px;
+        margin: 13px 0 30px;
+        line-height: 34px;
+        span {
+          font-size: 14px;
+          color: #262c32;
+          margin: 0 10px 0 20px;
+        }
+        .el-input {
+          width: 200px;
+          height: 34px;
+          /deep/.el-input__inner {
+            background-color: #f3f5f7;
+            height: 34px;
+            padding: 1px 0;
+            border: 1px solid #d7d8d9;
+          }
+          /deep/.el-input__inner:focus {
+            border-color: #d7d8d9;
+          }
+        }
+        .el-row{
+          .el-button{
+            width: 75px;
+            height: 34px;
+            margin-left: 20px;
+          }
+        }
+      }
+      .el-select {
+        width: 100px;
+        height: 34px;
+      }
+      /deep/ .el-input__inner {
+        background-color: #f3f5f7;
+        height: 34px;
+        font-size: 14px;
+        color: #262c32;
+        border: 1px solid #101010;
+      }
+      /deep/ .el-input__inner:focus {
+        border: 2px solid #101010;
       }
     }
   }

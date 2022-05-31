@@ -45,7 +45,8 @@
             clearable
           >
           </el-input>
-          <el-button
+          <el-button 
+          class="el-button-right"
             type="primary"
             size="mini"
             icon="el-icon-search"
@@ -210,12 +211,37 @@ export default {
         }
         .el-input {
           width: 200px;
+          height: 34px;
+          /deep/.el-input__inner {
+            background-color: #f3f5f7;
+            height: 34px;
+            padding: 1px 0;
+            border: 1px solid #d7d8d9;
+          }
+          /deep/.el-input__inner:focus {
+            border-color: #d7d8d9;
+          }
         }
-        .el-button {
-          margin-left: 10px;
+        
+        .el-button-right {
+          width: 34px;
+          height: 34px;
+          text-align: center;
+          padding: 0;
+          border-color: #dde0e7;
         }
         .width30 {
           width: 30px;
+        }
+        /deep/ .el-input__inner {
+          background-color: #f3f5f7;
+          height: 34px;
+          font-size: 14px;
+          color: #262c32;
+          border: 1px solid #101010;
+        }
+        /deep/ .el-input__inner:focus {
+          border: 2px solid #101010;
         }
       }
     }
