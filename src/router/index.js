@@ -14,8 +14,6 @@ import TeaInfo from "../views/TeaInfo.vue"
 import TeaEdit from "../views/TeaEdit.vue"
 import Clamanage from "../views/Clamanage.vue"
 import ClaAdd from "../views/ClaAdd.vue"
-
-
 import StudentIndex from "../views/StudentIndex.vue"
 import StuMenus from "../components/StuMenus.vue"
 import AllCourses from "../views/AllCourses.vue"
@@ -33,7 +31,9 @@ import Paginaion from '../views/Paginaion';
 import Course from '../views/Course';
 import PreviewCourse from '../views/PreviewCourse';
 import CourseRelease from '../views/CourseRelease';
-
+import MeasurementManagement from '../views/MeasurementManagement';
+import TestMain from '../views/TestMain';
+import NewTest from '../views/NewTest';
 
 
 export default new VueRouter({
@@ -132,7 +132,6 @@ export default new VueRouter({
                     component: CurriculumDesign,
                 },
                 {
-
                     path: "newcurriculum",
                     name: "NewCurriculum",
                     component: NewCurriculum,
@@ -179,10 +178,28 @@ export default new VueRouter({
                     component: CourseRelease,
                 }, {
 
+                    path: "measurementmanagement",
+                    name: "MeasurementManagement",
+                    component: MeasurementManagement,
+                    children: [{
+                        path: "testmain",
+                        name: "TestMain",
+                        component: TestMain,
+                    }]
+                }
+                , {
+
+                    path: "newtest",
+                    name: "NewTest",
+                    component: NewTest,
+                }
+                , {
+
                     path: "/paginaion",
                     name: "Paginaion",
                     component: Paginaion,
-                }, {
+                }
+                , {
                     path: "/course",
                     name: "Course",
                     component: Course,

@@ -51,9 +51,11 @@
             size="mini"
             icon="el-icon-search"
           ></el-button>
-          <el-button type="primary" size="medium"
+          <el-button type="primary" size="medium" 
             ><router-link to="newcurriculum" tag="i"
-              >新增视频课</router-link
+              >
+              新增视频课
+              </router-link
             ></el-button
           >
         </el-row>
@@ -201,6 +203,8 @@ export default {
         }
         i {
           font-style: normal;
+          padding: 10px 20px;
+          display: block;
         }
         .el-cascader {
           width: 160px;
@@ -229,6 +233,9 @@ export default {
           text-align: center;
           padding: 0;
           border-color: #dde0e7;
+        }
+        .el-button{
+          padding: 0;
         }
         .width30 {
           width: 30px;

@@ -10,7 +10,7 @@
         <li>资源库</li>
         <router-link to="/AdmMenus/curriculumdesign" tag="li">教研管理</router-link>
         <router-link to="/AdmMenus/courserelease" tag="li">教学管理</router-link>
-        <li>考试测评</li>
+        <router-link to="/AdmMenus/measurementmanagement" tag="li">考试测评</router-link>
       </ul>
       <ul class="hea-footer">
         <li>管理员</li>
