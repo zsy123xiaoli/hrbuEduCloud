@@ -1,14 +1,11 @@
 <template>
   <div class="Teamanage">
-  
-       <Slidemenus></Slidemenus>
+    <Slidemenus></Slidemenus>
     <div class="usermanage">
       <p>教师管理</p>
       <el-row>
         <router-link to="/AdmMenus/TeaAdd">
-          <el-button type="primary" size="medium"
-            >新增教师*</el-button
-          >
+          <el-button type="primary" size="medium">新增教师*</el-button>
         </router-link>
         <el-button
           size="medium"
@@ -49,14 +46,14 @@
           </el-select>
           <span class="ml20">创建时间</span>
           <el-date-picker
-          size="medium"
-          v-model="time"
-          type="daterange"
-          range-separator="至"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-        >
-        </el-date-picker>
+            size="medium"
+            v-model="time"
+            type="daterange"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+          >
+          </el-date-picker>
           <span class="ml20">关键字</span>
           <el-input
             placeholder="请输入内容"
@@ -65,27 +62,52 @@
             clearable
           >
           </el-input>
-          <el-button type="primary" size="medium" @click="search">搜索</el-button>
+          <el-button type="primary" size="medium" @click="search"
+            >搜索</el-button
+          >
         </el-row>
         <el-table
           ref="multipleTable"
           :data="tableData"
           tooltip-effect="dark"
           style="width: 100%"
-          :header-cell-style="{'text-align':'center'}"
+          :header-cell-style="{ 'text-align': 'center' }"
           @cell-dblclick="LookIndex"
           @selection-change="handleSelectionChange"
-
         >
           <el-table-column type="selection" width="39"></el-table-column>
-          <el-table-column type="index" label="用户名"  width="100"></el-table-column>
-          <el-table-column  prop="ID"   label="姓名"  width="100"></el-table-column>
-          <el-table-column  prop="NAME"  label="所属专业"  width="150" ></el-table-column>
-          <el-table-column prop="SEX" label="授课班级" width="100"></el-table-column>
-          
-          <el-table-column  prop="MAIL"  label="邮箱"   width="200"></el-table-column>
-          <el-table-column   prop="SCHOOL"  label="用户状态"  width="100"></el-table-column>
-          <el-table-column prop="FORBIDDEN" label="创建时间" width="180"></el-table-column>
+          <el-table-column
+            type="index"
+            label="用户名"
+            width="100"
+          ></el-table-column>
+          <el-table-column prop="ID" label="姓名" width="100"></el-table-column>
+          <el-table-column
+            prop="NAME"
+            label="所属专业"
+            width="150"
+          ></el-table-column>
+          <el-table-column
+            prop="SEX"
+            label="授课班级"
+            width="100"
+          ></el-table-column>
+
+          <el-table-column
+            prop="MAIL"
+            label="邮箱"
+            width="200"
+          ></el-table-column>
+          <el-table-column
+            prop="SCHOOL"
+            label="用户状态"
+            width="100"
+          ></el-table-column>
+          <el-table-column
+            prop="FORBIDDEN"
+            label="创建时间"
+            width="180"
+          ></el-table-column>
         </el-table>
       </div>
       <div class="pagination">
@@ -101,18 +123,16 @@
         </el-pagination>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 import Slidemenus from "../components/Eduslidemenus.vue";
 
 export default {
-    data() {
+  data() {
     return {
-      
       State: [
         {
           value: 2,
@@ -131,7 +151,7 @@ export default {
       value: 0,
       value1: "",
       input: "",
-      time:"",
+      time: "",
       tableData: [],
       multipleSelection: "",
       currentPage4: 4,
@@ -140,7 +160,7 @@ export default {
       pageNum: 1,
     };
   },
-   methods: {
+  methods: {
     getUserInfo() {
       axios
         .post("http://127.0.0.1:3000/api/system/user/login", {
@@ -179,7 +199,6 @@ export default {
         });
     },
 
-
     LookIndex(val) {
       this.multipleSelection = val;
       this.$router.push({
@@ -204,16 +223,15 @@ export default {
       const data = {};
       this.multipleSelection.forEach((item) => {
         data.val(item.val);
-        data.num(2)
-
+        data.num(2);
       });
       console.log(data);
       axios
         .post(
           "http://127.0.0.1:3000/api/user/searchStudent",
-          
-            data,
-          
+
+          data,
+
           {
             headers: {
               Authorization: localStorage.token,
@@ -228,14 +246,14 @@ export default {
         });
     },
     disable() {
-        axios
+      axios
         .post(
           "http://127.0.0.1:3000/api/user/disableStudent",
-            JSON.stringify([[1001002]]),
+          JSON.stringify([[1001002]]),
           {
             headers: {
-              'Content-Type': 'application/json;',
-               Authorization: localStorage.token,
+              "Content-Type": "application/json;",
+              Authorization: localStorage.token,
             },
           }
         )
@@ -245,7 +263,6 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-
     },
     search() {
       const data = {};
@@ -260,9 +277,8 @@ export default {
       //模糊搜索参数
       if (this.input) {
         data.val = this.input;
-        data.num=1
+        data.num = 1;
       }
-     
 
       axios
         .post(
@@ -291,11 +307,10 @@ export default {
     },
   },
 
-    components: {
+  components: {
     Slidemenus,
-
-},
-}
+  },
+};
 </script>
 
 <style lang="less" scoped>
@@ -369,5 +384,4 @@ export default {
     }
   }
 }
-
 </style>

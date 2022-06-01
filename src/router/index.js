@@ -38,6 +38,12 @@ import CourseRelease from '../views/CourseRelease';
 import MeasurementManagement from '../views/MeasurementManagement';
 import TestMain from '../views/TestMain';
 import NewTest from '../views/NewTest';
+import NewTestHint1 from '../views/NewTestHint1';
+import NewTestHint2 from '../views/NewTestHint2';
+import NewTestHint3 from '../views/NewTestHint3';
+import NewTestInfo from '../views/NewTestInfo';
+import NewTestSelectPapers from '../views/NewTestSelectPapers';
+import NewTestReleaseTesting from '../views/NewTestReleaseTesting';
 
 import CourseStudy from "../views/CourseStudy.vue"
 import MyClass from "../views/MyClass.vue"
@@ -77,28 +83,28 @@ export default new VueRouter({
                     component: PublicClass,
                 },
                 {
-                    path:"MyClass",
-                    name:"MyClass",
-                    component:MyClass,
+                    path: "MyClass",
+                    name: "MyClass",
+                    component: MyClass,
                 },
                 {
-                    path:"DataSet",
-                    name:"DataSet",
-                    component:DataSet,
+                    path: "DataSet",
+                    name: "DataSet",
+                    component: DataSet,
                 },
                 {
-                    path:"ChangePassword",
-                    name:"ChangePassword",
-                    component:ChangePassword,
+                    path: "ChangePassword",
+                    name: "ChangePassword",
+                    component: ChangePassword,
                 },
             ]
         },
         {
-            path:"/CourseStudy",
-            name:"CourseStudy",
-            component:CourseStudy,
+            path: "/CourseStudy",
+            name: "CourseStudy",
+            component: CourseStudy,
         },
-       
+
         {
             path: "/admin",
             name: "Admindex",
@@ -221,20 +227,54 @@ export default new VueRouter({
                         name: "TestMain",
                         component: TestMain,
                     }]
-                }
-                , {
+                }, {
 
                     path: "newtest",
                     name: "NewTest",
                     component: NewTest,
-                }
-                , {
+                    children: [{
+
+                            path: "newtesthint1",
+                            name: "NewTestHint1",
+                            component: NewTestHint1,
+                        },
+                        {
+
+                            path: "newtesthint2",
+                            name: "NewTestHint2",
+                            component: NewTestHint2,
+                        },
+                        {
+
+                            path: "newtesthint3",
+                            name: "NewTestHint3",
+                            component: NewTestHint3,
+                        },
+                        {
+
+                            path: "newtestinfo",
+                            name: "NewTestInfo",
+                            component: NewTestInfo,
+                        },
+                        {
+
+                            path: "newtestselectpapers",
+                            name: "NewTestSelectPapers",
+                            component: NewTestSelectPapers,
+                        },
+                        {
+
+                            path: "newtestreleasetesting",
+                            name: "NewTestReleaseTesting",
+                            component: NewTestReleaseTesting,
+                        },
+                    ]
+                }, {
 
                     path: "/paginaion",
                     name: "Paginaion",
                     component: Paginaion,
-                }
-                , {
+                }, {
                     path: "/course",
                     name: "Course",
                     component: Course,

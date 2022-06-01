@@ -95,9 +95,9 @@ export default {
       value2: [],
       text: "",
       textarea: "",
-      show: true,
-      shows1: "",
-      shows2: "",
+      show: false,
+      shows1: false,
+      shows2: false,
     };
   },
 
@@ -106,15 +106,15 @@ export default {
   methods: {
     showDictory() {
       this.show = !this.show;
-      this.show1 = false;
-      this.show2 = false;
     },
     hideDictory() {
       this.show = !this.show;
       if (this.text) {
         this.shows1 = true;
+        this.shows2 = false;
       } else {
         this.shows2 = true;
+        this.shows1 = false;
       }
     },
   },

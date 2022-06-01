@@ -64,6 +64,7 @@
             width="300"
             show-overflow-tooltip
             header-align="center"
+            align="center"
           >
           </el-table-column>
           <el-table-column
@@ -72,6 +73,7 @@
             width="60"
             header-align="center"
             show-overflow-tooltip
+            align="center"
           >
           </el-table-column>
           <el-table-column
@@ -80,6 +82,7 @@
             width="100"
             show-overflow-tooltip
             header-align="center"
+            align="center"
           >
           </el-table-column>
           <el-table-column
@@ -88,6 +91,7 @@
             width="100"
             show-overflow-tooltip
             header-align="center"
+            align="center"
           >
           </el-table-column>
           <el-table-column
@@ -96,6 +100,7 @@
             width="100"
             show-overflow-tooltip
             header-align="center"
+            align="center"
           >
           </el-table-column>
           <el-table-column
@@ -103,6 +108,7 @@
             label="状态"
             header-align="center"
             show-overflow-tooltip
+            align="center"
           >
           </el-table-column>
           <el-table-column
@@ -110,6 +116,7 @@
             width="140"
             header-align="center"
             show-overflow-tooltip
+            align="center"
           >
             <template slot-scope="scope">{{ scope.row.date }}</template>
           </el-table-column>
@@ -131,10 +138,9 @@
 <script>
 import Paginaion from "./Paginaion";
 
-
 export default {
   name: "SelectAddclass",
-  components: { Paginaion,  },
+  components: { Paginaion },
   data() {
     return {
       options: [
@@ -190,7 +196,7 @@ export default {
     },
     // 跳转到预览页面
     precourse() {
-      this.$router.push("./PreviewCourse")
+      this.$router.push("./PreviewCourse");
     },
   },
 };
