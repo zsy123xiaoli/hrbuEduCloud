@@ -54,33 +54,33 @@
           >
           <div style="margin: 15px 0"></div>
           <el-checkbox-group
-            v-model="checkedCities"
+            v-model="checkedMajors"
             @change="handleCheckedCitiesChange"
           >
-            <el-checkbox v-for="city in cities" :label="city" :key="city">
-            {{city}}
+            <el-checkbox v-for="major in majors" :label="major" :key="major">
+            {{major}}
             </el-checkbox>
           </el-checkbox-group>
         </el-row>
-        <!-- <el-row>
+        <el-row>
           <span> 所属班级</span>
           <el-checkbox
             :indeterminate="isIndeterminate"
             v-model="checkAll"
             size="medium"
-            @change="handleCheckAllChange"
+            @change="handleCheckAllChange1"
             >全选</el-checkbox
           >
           <div style="margin: 15px 0"></div>
           <el-checkbox-group
-            v-model="checkedCities"
-            @change="handleCheckedCitiesChange"
+            v-model="checkedClasses"
+            @change="handleCheckedCitiesChange1"
           >
-            <el-checkbox v-for="city in cities" :label="city" :key="city">
+            <el-checkbox v-for="city in classes" :label="city" :key="city">
             {{city}}
             </el-checkbox>
           </el-checkbox-group>
-        </el-row> -->
+        </el-row>
         <div class="button">
           <el-button type="primary" @click="save">新增</el-button>
           <el-button>取消</el-button>
@@ -94,25 +94,32 @@
 import Slidemenus from "../components/Eduslidemenus.vue";
 import axios from "axios";
 
-const cityOptions = [];
+const majorOptions = [];
+const classOptions = [];
+
 export default {
   data() {
     return {
       //院校信息
       school: [],
       NAME: "",
-      //专业信息
-     
+      //班级信息
+      department:"",
+
       Username: "",
-      
+
       Name: "",
       Emall: "",
 
-      checkAll: false,
-      checkedCities: ["软件工程"],
-      cities: cityOptions,
       //全选
       isIndeterminate: true,
+      checkAll: false,
+      //专业数据
+      checkedMajors: [],
+      majors: majorOptions,
+      //班级数据
+      checkedClasses: ["软件工程"],
+      classes: classOptions,
     };
   },
   mounted() {
@@ -136,15 +143,62 @@ export default {
   },
   methods: {
     handleCheckAllChange(val) {
-      this.checkedCities = val ? cityOptions : [];
+      this.checkedMajors = val ? majorOptions : [];
       this.isIndeterminate = false;
     },
     handleCheckedCitiesChange(value) {
       let checkedCount = value.length;
-      this.checkAll = checkedCount === this.cities.length;
+      this.checkAll = checkedCount === this.majors.length;
       this.isIndeterminate =
-        checkedCount > 0 && checkedCount < this.cities.length;
+        checkedCount > 0 && checkedCount < this.majors.length;
+        //由于班级信息要根据专业信息改变而改变,但是不能同时定义两个change方法,所以在此调用渲染班级信息方法
+      this.getClass()
+        
     },
+    handleCheckAllChange1(val) {
+      this.checkedClasses = val ? classOptions : [];
+      this.isIndeterminate = false;
+    },
+    handleCheckedCitiesChange1(value) {
+      let checkedCount = value.length;
+      this.checkAll = checkedCount === this.classes.length;
+      this.isIndeterminate =
+        checkedCount > 0 && checkedCount < this.classes.length;
+    },
+    getClass(){
+  
+      this.department = this.checkedMajors[0];
+      console.log(this.department);
+      // axios
+      //   .get(
+      //     "http://127.0.0.1:3000/api/system/user/getDepartmentClass",
+      //     {
+      //       params: {
+      //         department,
+      //       },
+      //     },
+      //     {
+      //       headers: {
+      //         Authorization: localStorage.token,
+      //       },
+      //     }
+      //   )
+      //   .then((response) => {
+      //     console.log(response);
+      //     console.log(response.data.message);
+      //     this.major = response.data.message;
+      //     response.data.message.forEach((item) => {
+           
+      //      classOptions.push(item.DEPARTMENT)
+          
+        
+      // });
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
+    },
+  
 
     save() {
      
@@ -196,7 +250,7 @@ export default {
 
     //选择院校后基于院校渲染专业
     getDepartment() {
-      let school = "";
+      let school=""
       school = this.NAME;
       console.log(school);
       axios
@@ -219,7 +273,7 @@ export default {
           this.major = response.data.message;
           response.data.message.forEach((item) => {
            
-           cityOptions.push(item.DEPARTMENT)
+           majorOptions.push(item.DEPARTMENT)
           
         
       });

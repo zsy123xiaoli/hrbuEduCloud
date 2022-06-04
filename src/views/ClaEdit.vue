@@ -3,13 +3,10 @@
     <Slidemenus></Slidemenus>
     <div class="content">
       <div class="header">
-        <span>学生信息</span>
+        <span>班级信息</span>
 
         <div class="primary">
-          <div class="top">
-            <img src="../assets/u4103.png" />
-            <p>{{ $route.query.NAME }}</p>
-          </div>
+          
           <div class="middle">
             <span class="i"></span><span class="title">基本信息</span>
             <ul>
@@ -46,7 +43,7 @@
                 </el-select>
               </li>
               <li>
-                <span>所属班级</span>
+                <span>班级名称</span>
                 <el-input
                   placeholder="请输入内容"
                   v-model="Classinput"
@@ -57,60 +54,8 @@
                 </el-input>
               </li>
 
-              <li>
-                <span>学籍号</span>
-                <el-input
-                  placeholder="请输入内容"
-                  v-model="Roolinput"
-                  size="medium"
-                  clearable
-                  style="width: 358px"
-                >
-                </el-input>
-              </li>
-              <li>
-                <span>姓名</span>
-                <el-input
-                  placeholder="请输入内容"
-                  v-model="Nameinput"
-                  size="medium"
-                  clearable
-                  style="width: 358px"
-                >
-                </el-input>
-              </li>
-
-              <li>
-                <span>性别</span
-                ><el-select
-                  v-model="SEX"
-                  style="width: 358px"
-                  placeholder="请选择"
-                >
-                  <el-option
-                    v-for="item in gender"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.SEX"
-                  >
-                  </el-option>
-                </el-select>
-              </li>
-
-              <li>
-                <span>邮箱</span>
-                <el-input
-                  v-model="Emallinput"
-                  placeholder="请输入内容"
-                  style="width: 358px"
-                ></el-input>
-              </li>
-              <li>
-                <span>自我介绍</span>
-                <textarea v-model="introduce"></textarea>
-              </li>
+             
             </ul>
-
             <div class="button">
               <el-button type="primary" @click="save">保存</el-button>
               <el-button>取消</el-button>
@@ -274,18 +219,7 @@ export default {
       height: 1000px;
       width: 870px;
       // overflow: hidden;
-      .top {
-        height: 200px;
-        width: 870px;
-
-        img {
-          display: block;
-          margin: 20px auto;
-        }
-        p {
-          text-align: center;
-        }
-      }
+     
       .middle {
         .i {
           height: 50px;

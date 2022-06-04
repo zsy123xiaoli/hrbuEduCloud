@@ -1,10 +1,10 @@
 <template>
-  <div class="TeaInfo">
+  <div class="ClaInfo">
     <Slidemenus></Slidemenus>
     <div class="content">
       <div class="header">
-        <span>教师信息</span>
-        <el-button plain>修改密码</el-button>
+        <span>班级信息</span>
+        
         <el-button plain>结课</el-button>
         <el-button plain>激活</el-button>
         <div class="primary">
@@ -16,15 +16,7 @@
             <span class="i"></span><span class="title">基本信息</span>
             <el-button @click="StudentEdit" type="primary">编辑</el-button>
             <ul>
-              <li>
-                <span>用户名</span><span>{{ $route.query.SCHOOL }}</span>
-              </li>
-              <li>
-                <span>真实姓名</span><span>{{ $route.query.CLASS }}</span>
-              </li>
-              <li>
-                <span>邮箱</span><span>{{ $route.query.DEPARTMENT }}</span>
-              </li>
+       
               <li>
                 <span>所属院校</span><span>{{ $route.query.ID }}</span>
               </li>
@@ -33,11 +25,9 @@
               </li>
 
               <li>
-                <span>教授班级</span><span>{{ $route.query.MAIL }}</span>
+                <span>班级名称</span><span>{{ $route.query.MAIL }}</span>
               </li>
-               <li>
-                <span>性别</span><span>{{ $route.query.MAIL }}</span>
-              </li>
+             
             </ul>
           </div>
         </div>
@@ -92,7 +82,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.TeaInfo {
+.ClaInfo {
   display: flex;
   background-color: #f3f5f7;
   .content {
