@@ -190,6 +190,16 @@ export default {
       width: 120px;
       height: 34px;
     }
+     ::v-deep {
+        .el-input__inner {
+          &::placeholder {
+            color: #262c32;
+          }
+        }
+        .el-input__icon {
+          color: #262c32;
+        }
+      }
     /deep/ .el-input__inner {
       background-color: #f3f5f7;
       height: 34px;

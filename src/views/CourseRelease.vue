@@ -96,9 +96,17 @@ export default {
     };
   },
 
-  mounted() {},
+  mounted() {
+    this.yinchang();
+  },
 
-  methods: {},
+  methods: {
+    yinchang() {
+      // console.log((this.$refs.Course.s));
+      this.$refs.Course.isActive=true;
+      // console.log((this.$refs.Course));
+    },
+  },
 };
 </script>
 
@@ -161,14 +169,15 @@ export default {
             border-color: #d7d8d9;
           }
         }
-        .el-row{
-          .el-button{
+        .el-row {
+          .el-button {
             width: 75px;
             height: 34px;
             margin-left: 20px;
           }
         }
       }
+
       .el-select {
         width: 100px;
         height: 34px;

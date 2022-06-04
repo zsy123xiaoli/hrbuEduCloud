@@ -3,9 +3,9 @@
     <h2>·考试测评</h2>
     <ul>
       <router-link to="/AdmMenus/measurementmanagement" tag="li"
-        >考试管理</router-link
+        >测评管理</router-link
       >
-      <router-link to="" tag="li">测评管理</router-link>
+      <router-link to="" tag="li">试卷管理</router-link>
       <router-link to="" tag="li">成绩与批改</router-link>
     </ul>
   </div>

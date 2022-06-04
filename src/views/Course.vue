@@ -37,9 +37,21 @@
             </ul>
           </div>
           <div class="courser-manage">
-            <el-button type="primary" size="mini" plain>编辑</el-button>
-            <el-button type="primary" size="mini" plain>删除</el-button>
-            <el-button type="primary" size="mini" plain>发布</el-button>
+            <el-button
+              type="primary"
+              size="mini"
+              plain
+              :class="[isActive ? 'active' : 'el-button']"
+              >编辑</el-button
+            >
+            <el-button
+              type="primary"
+              size="mini"
+              plain
+              :class="[isActive ? 'active' : 'el-button']"
+              >删除</el-button
+            >
+            <el-button type="primary" size="mini" plain>发布到班级</el-button>
           </div>
         </el-row>
       </div>
@@ -52,12 +64,16 @@ export default {
   name: "MyCourse",
 
   data() {
-    return {};
+    return {
+      isActive: false,
+    };
   },
 
   mounted() {},
 
-  methods: {},
+  methods: {
+    showy() {},
+  },
 };
 </script>
 
@@ -65,6 +81,9 @@ export default {
 .course {
   width: 980px;
   margin-top: 10px;
+  .active {
+    display: none;
+  }
   .course1 {
     background-color: #fff;
     display: flex;
