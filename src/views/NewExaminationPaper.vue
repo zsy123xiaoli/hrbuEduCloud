@@ -1,13 +1,13 @@
 <template>
   <div class="s1">
     <TestResults />
-    <div class="newtest">
+    <div class="newexaminationpaper">
       <div class="breadcrumb">
-        <router-link to="measurementmanagement" tag="span" class="bc1"
-          >测评管理</router-link
+        <router-link to="examinationpapermanagement" tag="span" class="bc1"
+          >试卷管理</router-link
         >
         <span>></span>
-        <span>新建测评</span>
+        <span>新建试卷</span>
       </div>
       <div class="hint">
         <keep-alive>
@@ -17,13 +17,10 @@
       <div class="header">
         <ul>
           <li @click="show(1)" :class="index === 1 ? 'active' : ''">
-            第一步：测评基本信息
+            第一步：试卷基本信息
           </li>
           <li @click="show(2)" :class="index === 2 ? 'active' : ''">
-            第二步：选择试卷
-          </li>
-          <li @click="show(3)" :class="index === 3 ? 'active' : ''">
-            第三步：发布测评
+            第二步：组卷
           </li>
         </ul>
         <div class="tab_content">
@@ -38,23 +35,11 @@
 
 <script>
 import TestResults from "../components/TestResults";
-import NewTestHint1 from "./NewTestHint1";
-import NewTestHint2 from "./NewTestHint2";
-import NewTestHint3 from "./NewTestHint3";
-import NewTestInfo from "./NewTestInfo";
-import NewTestSelectPapers from "./NewTestSelectPapers";
-import NewTestReleaseTesting from "./NewTestReleaseTesting";
 
 export default {
-  name: "NewTest",
+  name: "NewExaminationPaper",
   components: {
     TestResults,
-    NewTestHint1,
-    NewTestHint2,
-    NewTestHint3,
-    NewTestInfo,
-    NewTestSelectPapers,
-    NewTestReleaseTesting,
   },
   data() {
     return {
@@ -86,8 +71,6 @@ export default {
       if (value === 1) this.class = "active";
       if (value === 2) this.comp = "NewTestSelectPapers";
       if (value === 2) this.comps = "NewTestHint2";
-      if (value === 3) this.comp = "NewTestReleaseTesting";
-      if (value === 3) this.comps = "NewTestHint3";
     },
   },
 };
@@ -98,7 +81,7 @@ export default {
   display: flex;
   justify-content: center;
   background-color: #f3f5f7;
-  .newtest {
+  .newexaminationpaper {
     width: 980px;
     margin-left: 20px;
     .breadcrumb {
@@ -142,12 +125,12 @@ export default {
     }
   }
 
-  /deep/.testresults > ul > li:first-child {
+  /deep/.testresults > ul > li:nth-child(2) {
     border-left: 5px solid #42a2eb;
     font-size: 16px;
     color: #262c32;
   }
-  /deep/ .testresults > ul > li:first-child:hover {
+  /deep/ .testresults > ul > li:nth-child(2):hover {
     color: #262c32;
     text-decoration: none;
     background-color: #fff;

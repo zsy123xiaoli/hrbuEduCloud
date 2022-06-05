@@ -158,6 +158,7 @@ export default {
       left: 80px;
       top: 40px;
     }
+    
     .opinion {
       position: absolute;
       top: 9px;
@@ -187,6 +188,7 @@ export default {
         color: #7a7f85;
         line-height: 35px;
       }
+      
     }
     .el-select {
       width: 200px;
@@ -196,6 +198,16 @@ export default {
         background: #f3f5f7;
         font-size: 14px;
         color: #262c32;
+      }
+       ::v-deep {
+        .el-input__inner {
+          &::placeholder {
+            color: #262c32;
+          }
+        }
+        .el-input__icon {
+          color: #262c32;
+        }
       }
       /deep/.el-input__inner:focus {
         border: 2px solid #262c32;

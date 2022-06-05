@@ -103,7 +103,7 @@ export default {
   methods: {
     yinchang() {
       // console.log((this.$refs.Course.s));
-      this.$refs.Course.isActive=true;
+      this.$refs.Course.isActive = true;
       // console.log((this.$refs.Course));
     },
   },
@@ -144,6 +144,16 @@ export default {
           width: 196px;
           height: 34px;
           margin-right: 10px;
+        }
+      }
+      ::v-deep {
+        .el-input__inner {
+          &::placeholder {
+            color: #262c32;
+          }
+        }
+        .el-input__icon {
+          color: #262c32;
         }
       }
       .promulgator {

@@ -5,7 +5,7 @@
       <router-link to="/AdmMenus/measurementmanagement" tag="li"
         >测评管理</router-link
       >
-      <router-link to="" tag="li">试卷管理</router-link>
+      <router-link to="/AdmMenus/examinationpapermanagement" tag="li">试卷管理</router-link>
       <router-link to="" tag="li">成绩与批改</router-link>
     </ul>
   </div>
