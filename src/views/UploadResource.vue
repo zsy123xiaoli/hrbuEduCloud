@@ -8,9 +8,9 @@
           <span>请上传课件文件，上传成功后请点击"保存&下一步"</span>
         </div>
         <div>
-            <router-link to="/AdmMenus/UploadSetInfo">
-                <el-button type="primary" plain>保存&下一步</el-button>
-            </router-link>
+          <router-link to="/AdmMenus/UploadSetInfo">
+            <el-button type="primary" plain>保存&下一步</el-button>
+          </router-link>
         </div>
       </div>
       <div class="primary">
@@ -39,8 +39,22 @@
               </el-select>
             </li>
             <li>
-              <span>课件文件</span
-              ><el-button type="primary">选择文件</el-button>
+              <span>课件文件</span>
+              <el-upload
+                class="upload-demo"
+                action="http://127.0.0.1:3000/api/acceptFile/Picture"
+                name="picture"
+                :headers="headerObj"
+                :on-preview="handlePreview"
+                :on-remove="handleRemove"
+                :before-remove="beforeRemove"
+                multiple
+                :limit="3"
+                :on-exceed="handleExceed"
+          
+              >
+                <el-button size="small" type="primary">点击上传</el-button>
+              </el-upload>
             </li>
             <li>
               <img src="../assets/hin.png" /><span class="slogan"
@@ -62,8 +76,24 @@ export default {
     return {
       kind: [{ value: "视频" }, { value: "文档" }],
       value: "",
+      headerObj:{Authorization: localStorage.token},
     };
   },
+  methods:{
+    handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePreview(file) {
+        console.log(file);
+      },
+      handleExceed(files, fileList) {
+        this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+      },
+      beforeRemove(file, fileList) {
+        return this.$confirm(`确定移除 ${ file.name }？`);
+      }
+    },
+
   components: {
     RepositoryMenus,
   },
@@ -108,6 +138,7 @@ export default {
           li {
             text-align: center;
             width: 300px;
+            cursor: pointer;
             &:first-child {
               border-bottom: solid 3px rgba(1, 104, 183, 1);
             }

@@ -46,7 +46,7 @@
           </el-select>
           <span class="ml20">状态</span>
           <el-select
-            v-model="State.value"
+            v-model="State.value1"
             clearable
             size="medium"
             placeholder="请选择"
@@ -55,7 +55,7 @@
               v-for="item in State"
               :key="item.value"
               :label="item.label"
-              :value="item.value"
+              :value="item.value1"
             >
             </el-option>
           </el-select>
@@ -152,15 +152,15 @@ export default {
     return {
       State: [
         {
-          value: 2,
+          value1: 2,
           label: "全部",
         },
         {
-          value: 1,
+          value1: 1,
           label: "有效",
         },
         {
-          value: 0,
+          value1: 0,
           label: "禁用",
         },
       ],
@@ -177,7 +177,7 @@ export default {
     };
   },
   mounted() {
-    this.State.value = 2;
+    // this.State.value1 = 2;
 
     this.getUserInfo();
   },
@@ -226,7 +226,7 @@ export default {
     LookIndex(val) {
       this.multipleSelection = val;
       //对时间戳进行处理后在路由传参
-      this.multipleSelection.TIMESTAMP= dayjs(new Date(Number(this.multipleSelection.TIMESTAMP))).format("YYYY-MM-DD HH:mm:ss")
+      this.multipleSelection.TIMESTAMP = dayjs(new Date(Number(this.multipleSelection.TIMESTAMP))).format("YYYY-MM-DD HH:mm:ss")
       this.$router.push({
         name: "StudentInfo",
         query: { ...this.multipleSelection },

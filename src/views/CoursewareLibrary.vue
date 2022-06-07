@@ -1,39 +1,36 @@
 <template>
-  <div class="header">
-    <Slidemenus></Slidemenus>
-    <div class="usermanage">
-      <p>学生管理</p>
-      <el-row>
-        <router-link to="/AdmMenus/ClaAdd">
-          <el-button type="primary" size="medium" @click="addStu"
-            >新增班级*</el-button
-          >
-        </router-link>
-        <el-button
-          size="medium"
-          @click="rePassword"
-          :disabled="!multipleSelection.length"
-          >重置密码</el-button
-        >
-        <el-button
-          size="medium"
-          @click="disable"
-          :disabled="!multipleSelection.length"
-          >结课</el-button
-        >
-        <el-button
-          size="medium"
-          @click="disable"
-          :disabled="!multipleSelection.length"
-          >激活</el-button
-        >
-      </el-row>
-      <div class="content">
+  <div class="CoursewareLibrary">
+    <RepositoryMenus></RepositoryMenus>
+    <div class="coursewarelibrary">
+      <p>课件库</p>
+      <div class="top">
         <el-row>
-          <span class="ml20">所属专业</span>
+          <el-cascader
+            :options="options1"
+            placeholder="请选择知识点"
+            size="medium"
+            clearable
+          ></el-cascader>
+          <span class="ml20">状态</span>
+          <el-select
+            v-model="State.value"
+            style="width: 130px"
+            clearable
+            size="medium"
+            placeholder="请选择"
+          >
+            <el-option
+              v-for="item in State"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+          <span class="ml20">难度</span>
           <el-select
             v-model="Major.value"
-            style="width: 150px"
+            style="width: 130px"
             placeholder="请选择"
           >
             <el-option
@@ -44,24 +41,9 @@
             >
             </el-option>
           </el-select>
-          <span class="ml20">状态</span>
-          <el-select
-            v-model="State.value1"
-            clearable
-            size="medium"
-            placeholder="请选择"
-          >
-            <el-option
-              v-for="item in State"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value1"
-            >
-            </el-option>
-          </el-select>
           <span class="ml20">关键字</span>
           <el-input
-            placeholder="请输入内容"
+            placeholder="请输入课件名"
             v-model="input"
             size="medium"
             clearable
@@ -70,44 +52,75 @@
           <el-button type="primary" size="medium" @click="search"
             >搜索</el-button
           >
+          <router-link to="/AdmMenus/UploadResource">
+
+              <el-button type="primary" size="medium">新增课件</el-button>
+          </router-link>
         </el-row>
+      </div>
+      <div class="content">
         <el-table
           ref="multipleTable"
           :data="tableData"
           tooltip-effect="dark"
           style="width: 100%"
-          :header-cell-style="{'text-align':'center'}"
+          :header-cell-style="{ 'text-align': 'center' }"
           @cell-dblclick="LookIndex"
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="39"></el-table-column>
           <el-table-column
-            type="index"
-            label="序号"
+            prop="NAME"
+            label="课件名称"
+            width="200"
+          ></el-table-column>
+          <el-table-column
+            prop="DEPARTMENT"
+            label="类型"
+            width="50"
+          ></el-table-column>
+          <el-table-column prop="ID" label="时常" width="50"></el-table-column>
+          <el-table-column
+            prop="DEPARTMENT"
+            label="配题"
             width="50"
           ></el-table-column>
           <el-table-column
-            prop="ID"
-            label="班级名称"
-            width="150"
-          ></el-table-column>
-          <el-table-column
-            prop="NAME"
-            label="所属院校"
-            width="200"
-          ></el-table-column>
-          <el-table-column prop="SEX" label="所属专业" width="200"></el-table-column>
-       
-          <el-table-column
             prop="DEPARTMENT"
-            label="班级人数"
+            label="创建者"
             width="100"
           ></el-table-column>
           <el-table-column
-            prop="SCHOOL"
-            label="状态"
-            width="150"
+            prop="DEPARTMENT"
+            label="难度"
+            width="80"
           ></el-table-column>
+          <el-table-column
+            prop="DEPARTMENT"
+            label="状态"
+            width="80"
+          ></el-table-column>
+
+          <el-table-column
+            prop="SEX"
+            label="创建时间"
+            width="200"
+          ></el-table-column>
+          <el-table-column label="操作">
+            <template slot-scope="scope">
+              <el-button
+                size="mini"
+                @click="handleEdit(scope.$index, scope.row)"
+                >编辑</el-button
+              >
+              <el-button
+                size="mini"
+                type="danger"
+                @click="handleDelete(scope.$index, scope.row)"
+                >删除</el-button
+              >
+            </template>
+          </el-table-column>
         </el-table>
       </div>
       <div class="pagination">
@@ -129,10 +142,11 @@
 <script>
 import axios from "axios";
 import dayjs from "dayjs";
-import Slidemenus from "../components/Eduslidemenus.vue";
+import RepositoryMenus from "../components/RepositoryMenus";
+
 export default {
   components: {
-    Slidemenus,
+    RepositoryMenus,
   },
   data() {
     return {
@@ -150,9 +164,23 @@ export default {
           label: "禁用",
         },
       ],
+      //选择知识点数据
+      options1: [
+        {
+          value: "zhinan",
+          label: "IT/互联网",
+          children: [
+            {
+              value: "shejiyuanze",
+              label: "前端开发",
+            },
+          ],
+        },
+      ],
       Major: [{ value: "软件工程" }, { value: "师范数学" }],
-      value: 0,
-      value1: "",
+
+      value1: 2,
+
       input: "",
       tableData: [],
       multipleSelection: "",
@@ -163,11 +191,29 @@ export default {
     };
   },
   mounted() {
-    // this.State.value1 = 2;
+    this.State.value1 = 2;
 
     this.getUserInfo();
   },
   methods: {
+      handleEdit(index, row) {
+        console.log(index, row);
+      },
+      handleDelete(index, row) {
+        console.log(index, row);
+      },
+      handleSelectionChange(val) {
+        console.log(val);
+        this.multipleSelection = val;
+        console.log(this.multipleSelection);
+      },
+      handleSizeChange(val) {
+        console.log(`每页 ${val} 条`);
+      },
+      handleCurrentChange(val) {
+        console.log(`当前页: ${val}`);
+      },
+      //获取用户信息接口
     getUserInfo() {
       axios
         .post("http://127.0.0.1:3000/api/system/user/login", {
@@ -205,109 +251,35 @@ export default {
           console.log(error);
         });
     },
-  
-  
+
+    
     LookIndex(val) {
       this.multipleSelection = val;
       //对时间戳进行处理后在路由传参
-      this.multipleSelection.TIMESTAMP= dayjs(new Date(Number(this.multipleSelection.TIMESTAMP))).format("YYYY-MM-DD HH:mm:ss")
+      this.multipleSelection.TIMESTAMP = dayjs(
+        new Date(Number(this.multipleSelection.TIMESTAMP))
+      ).format("YYYY-MM-DD HH:mm:ss");
       this.$router.push({
         name: "StudentInfo",
         query: { ...this.multip3leSelection },
       });
       console.log(this.multipleSelection);
     },
-    handleSelectionChange(val) {
-      console.log(val);
-      this.multipleSelection = val;
-      console.log(this.multipleSelection);
-    },
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
-    },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
-    },
-    rePassword() {
-      console.log(this.multipleSelection);
-      const data = {};
-      this.multipleSelection.forEach((item) => {
-        data.val(item.val);
-        data.num(2)
 
-      });
-      console.log(data);
-      axios
-        .post(
-          "http://127.0.0.1:3000/api/user/searchStudent",
-            data,        
-          {
-            headers: {
-              Authorization: localStorage.token,
-            },
-          }
-        )
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-    disable() {
-      const param = [];
-      const userId = [];
-      // const userId = {};
-      this.multipleSelection.forEach((item) => {
-        console.log(item);
-        if (item.FORBIDDEN === "有效") {
-          // userId.userid=Number(item.ID);
-          userId.push(Number(item.ID));
-          // param.push(userId);
-          // console.log(typeof JSON.stringify(userId));
-          // return;
-        } else if (item.FORBIDDEN === "结课") {
-          userId.push(Number(item.ID));
-        }
-        param.push(userId);
-      });
-      console.log(JSON.stringify(param))
-      axios
-        .post(
-          "http://127.0.0.1:3000/api/user/disableStudent",
-            JSON.stringify([[1001002]]),
-          {
-            headers: {
-              // 'Content-Type': 'application/json;',
-               Authorization: localStorage.token,
-            },
-          }
-        )
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-
-    },
+ 
     search() {
       const data = {};
       //模糊搜索参数
       if (this.input) {
         data.val = this.input;
-        data.num=1
+        data.num = 1;
       }
       axios
-        .post(
-          "http://127.0.0.1:3000/api/user/searchStudent",
-          data,
-          {
-            headers: {
-              Authorization: localStorage.token,
-            },
-          }
-        )
+        .post("http://127.0.0.1:3000/api/user/searchStudent", data, {
+          headers: {
+            Authorization: localStorage.token,
+          },
+        })
         .then((response) => {
           console.log(response.data);
           response.data.message.map((item) => {
@@ -327,23 +299,24 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.header {
+.CoursewareLibrary {
   display: flex;
   background-color: #f3f5f7;
-  .usermanage {
-    // margin-left: 20px;
-    width: 998px;
+  .coursewarelibrary {
+    width: 1200px;
     margin: 0 auto;
+
     p {
       color: #7a7f85;
       line-height: 56px;
     }
-    .content {
-      width: 980px;
+    .top {
+      height: 95px;
       background-color: #fff;
-      margin-top: 20px;
-      padding: 20px;
+      border-radius: 5px;
+      line-height: 95px;
       .el-row {
+        margin: 0 auto;
         span {
           font-size: 14px;
           color: #262c32;
@@ -353,9 +326,7 @@ export default {
         .ml20 {
           margin-left: 20px;
         }
-        .el-select {
-          width: 95px;
-        }
+
         .el-date-picker {
           width: 300px;
         }
@@ -365,7 +336,17 @@ export default {
         .el-button {
           margin-left: 20px;
         }
+        .el-cascader {
+          margin-left: 74px;
+        }
       }
+    }
+    .content {
+      width: 1160px;
+      background-color: #fff;
+      margin-top: 20px;
+      padding: 20px;
+
       .el-table {
         margin-top: 20px;
         /deep/.el-table__header-wrapper {

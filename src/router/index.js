@@ -1,3 +1,4 @@
+
 import Vue from "vue"
 import VueRouter from "vue-router"
 Vue.use(VueRouter)
@@ -11,7 +12,6 @@ import StudentInfo from "../views/StudentInfo.vue"
 import StudentEdit from "../views/StudentEdit.vue"
 //教师管理
 import Teamanage from "../views/Teamanage.vue"
-
 import TeaAdd from "../views/TeaAdd.vue"
 import TeaInfo from "../views/TeaInfo.vue"
 import TeaEdit from "../views/TeaEdit.vue"
@@ -21,7 +21,7 @@ import ClaAdd from "../views/ClaAdd.vue"
 import SingleChoice from "../views/SingleChoice.vue"
 import UploadResource from "../views/UploadResource.vue"
 import UploadSetInfo from "../views/UploadSetInfo.vue"
-import DoExercise from "../views/DoExercise.vue"
+import UploadDoExercise from "../views/UploadDoExercise.vue"
 
 
 
@@ -196,8 +196,8 @@ export default new VueRouter({
                     component: UploadSetInfo,
                 },
                 {
-                    path: "DoExercise",
-                    name: "DoExercise",
+                    path: "UploadDoExercise",
+                    name: "UploadDoExercise",
                     component: DoExercise,
                 },
 
@@ -370,4 +370,6 @@ export default new VueRouter({
         }
 
     ]
+
+
 })

@@ -37,13 +37,15 @@ import {
   Form,
   FormItem,
   Radio,
-
+  Popover,
   RadioGroup,
   CheckboxGroup,
-  MessageBox
+  MessageBox,
+  Dialog
 
 } from 'element-ui';
 
+Vue.use(Dialog)
 Vue.use(Input)
 Vue.use(Button)
 Vue.use(Row)
@@ -68,6 +70,8 @@ Vue.use(Form);
 Vue.use(FormItem);
 Vue.use(Radio);
 Vue.use(RadioGroup);
+Vue.use(Popover);
+
 
 
 

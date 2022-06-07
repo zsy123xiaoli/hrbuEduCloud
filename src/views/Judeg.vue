@@ -1,7 +1,7 @@
 <template>
-  <div class="SingleChoice">
+  <div class="Judeg">
     <RepositoryMenus></RepositoryMenus>
-    <div class="singlechoice">
+    <div class="judeg">
       <div class="top">
         <span class="i"></span><span class="title">基础信息</span>
         <el-row>
@@ -12,13 +12,13 @@
             clearable
           ></el-cascader>
         </el-row>
-        <span  class="changeCss">题型</span>
-        <span  class="changeCss Single">单选题</span>
-        <span  class="changeCss">多选题</span>
-        <span  class="changeCss">判断题</span>
-        <span  class="changeCss">简答题</span>
-        <span  class="changeCss">填空题</span>
-        <span  class="changeCss">编码题</span>
+        <span @click="changeCss($event)" class="changeCss">题型</span>
+        <span @click="changeCss($event)" class="changeCss">单选题</span>
+        <span @click="changeCss($event)" class="changeCss ">多选题</span>
+        <span @click="changeCss($event)" class="changeCss Judeg">判断题</span>
+        <span @click="changeCss($event)" class="changeCss">简答题</span>
+        <span @click="changeCss($event)" class="changeCss">填空题</span>
+        <span @click="changeCss($event)" class="changeCss">编码题</span>
         <el-row>
           <span class="diff">难度</span>
 
@@ -44,115 +44,19 @@
               >A</span
             ><input v-model="choiceA" class="Choice" />
 
-            <el-button
-              @click="openTinymce(1)"
-              slot="reference"
-              size="mini"
-              type="primary"
-              plain
-              >富媒体编辑</el-button
-            >
-            <el-dialog
-              title="选项A"
-              :visible.sync="dialogVisible"
-              width="55%"
-              :before-close="handleClose"
-            >
-              <Tinymce v-if="showTinymce"></Tinymce>
-              <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="dialogVisible = false"
-                  >确 定</el-button
-                >
-              </span>
-            </el-dialog>
+            
           </li>
           <li>
             <input @click="ChoiceB" type="checkbox" :checked="checkB" /><span
               >B</span
             ><input v-model="choiceB" class="Choice" />
-            <el-button
-              @click="openTinymce(1)"
-              slot="reference"
-              size="mini"
-              type="primary"
-              plain
-              >富媒体编辑</el-button
-            >
-            <el-dialog
-              title="选项A"
-              :visible.sync="dialogVisible"
-              width="55%"
-              :before-close="handleClose"
-            >
-              <Tinymce v-if="showTinymce"></Tinymce>
-              <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="dialogVisible = false"
-                  >确 定</el-button
-                >
-              </span>
-            </el-dialog>
+          
           </li>
-          <li>
-            <input @click="ChoiceC" type="checkbox" :checked="checkC" /><span
-              >C</span
-            ><input v-model="choiceC" class="Choice" />
-            <el-button
-              @click="openTinymce(1)"
-              slot="reference"
-              size="mini"
-              type="primary"
-              plain
-              >富媒体编辑</el-button
-            >
-            <el-dialog
-              title="选项A"
-              :visible.sync="dialogVisible"
-              width="55%"
-              :before-close="handleClose"
-            >
-              <Tinymce v-if="showTinymce"></Tinymce>
-              <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="dialogVisible = false"
-                  >确 定</el-button
-                >
-              </span>
-            </el-dialog>
-          </li>
-          <li>
-            <input @click="ChoiceD" type="checkbox" :checked="checkD" /><span
-              >D</span
-            ><input v-model="choiceD" class="Choice" />
-            <el-button
-              @click="openTinymce(1)"
-              slot="reference"
-              size="mini"
-              type="primary"
-              plain
-              >富媒体编辑</el-button
-            >
-            <el-dialog
-              title="选项A"
-              :visible.sync="dialogVisible"
-              width="55%"
-              :before-close="handleClose"
-            >
-              <Tinymce v-if="showTinymce"></Tinymce>
-              <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="dialogVisible = false"
-                  >确 定</el-button
-                >
-              </span>
-            </el-dialog>
-          </li>
+       
         </ul>
-        <p class="tag">*请将正确答勾选出来</p>
       </div>
       <div class="anwser">
-        <span class="i"></span><span class="title">答案与解析</span>
+        <span class="i"></span><span class="title">解析</span>
         <Tinymce></Tinymce>
       </div>
       <div class="bottom">
@@ -171,19 +75,15 @@ import Tinymce from "../components/Tinymce";
 export default {
   data() {
     return {
-      dialogVisible: false,
-      //富文本显示状态
-      showTinymce: false,
+      
       //按钮是否被选
       checkA: false,
       checkB: false,
-      checkC: false,
-      checkD: false,
+      
       //输入框中的值
-      choiceA: "",
-      choiceB: "",
-      choiceC: "",
-      choiceD: "",
+      choiceA: "对",
+      choiceB: "错",
+    
       difficulty: [
         { value: "入门" },
         { value: "初级" },
@@ -228,12 +128,7 @@ export default {
     ChoiceB() {
       this.checkB = !this.checkB;
     },
-    ChoiceC() {
-      this.checkC = !this.checkC;
-    },
-    ChoiceD() {
-      this.checkD = !this.checkD;
-    },
+    
     save() {
       if (this.checkA) {
         console.log(this.choiceA);
@@ -249,10 +144,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.SingleChoice {
+.Judeg {
   display: flex;
   background-color: #f3f5f7;
-  .singlechoice {
+  .judeg {
     // margin-left: 20px;
     width: 998px;
     margin: 0 auto;
@@ -281,7 +176,7 @@ export default {
         margin: 20px 0 0 45px;
         cursor: pointer;
       }
-      .Single{
+      .Judeg{
         background-color:rgb(204 255 255) ;
         color: rgb(66, 162, 235);
         border-radius:5px;
@@ -318,9 +213,6 @@ export default {
           width: 700px;
           margin-right: 20px;
         }
-      }
-      .tag{
-        padding: 20px 0 20px 40px;
       }
       /deep/ .tox-tinymce {
         margin: 0 auto;
