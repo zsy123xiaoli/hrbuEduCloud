@@ -35,19 +35,27 @@
 
 <script>
 import TestResults from "../components/TestResults";
+import ExaminationPaperHint1 from "./ExaminationPaperHint1";
+import ExaminationPaperHint2 from "./ExaminationPaperHint2";
+import ExaminationPaperInfo from "./ExaminationPaperInfo";
+import TestPaperComposition from "./TestPaperComposition";
 
 export default {
   name: "NewExaminationPaper",
   components: {
     TestResults,
+    ExaminationPaperHint1,
+    ExaminationPaperHint2,
+    ExaminationPaperInfo,
+    TestPaperComposition,
   },
   data() {
     return {
       // 控制切换按钮后按钮改变样式
       index: 1,
       // 控制子组件显示
-      comp: "NewTestInfo",
-      comps: "NewTestHint1",
+      comp: "ExaminationPaperInfo",
+      comps: "ExaminationPaperHint1",
       // 控制点击按钮后子组件显示，再次点击隐藏
       isShow: true,
     };
@@ -66,11 +74,11 @@ export default {
         this.isShow = true;
         // console.log("dd");
       }
-      if (value === 1) this.comp = "NewTestInfo";
-      if (value === 1) this.comps = "NewTestHint1";
+      if (value === 1) this.comp = "ExaminationPaperInfo";
+      if (value === 1) this.comps = "ExaminationPaperHint1";
       if (value === 1) this.class = "active";
-      if (value === 2) this.comp = "NewTestSelectPapers";
-      if (value === 2) this.comps = "NewTestHint2";
+      if (value === 2) this.comp = "TestPaperComposition";
+      if (value === 2) this.comps = "ExaminationPaperHint2";
     },
   },
 };

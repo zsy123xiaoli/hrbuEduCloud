@@ -56,6 +56,10 @@ import NewTestReleaseTesting from '../views/NewTestReleaseTesting';
 import ExaminationPaperManagement from '../views/ExaminationPaperManagement';
 import ExaminationPaper from '../views/ExaminationPaper';
 import NewExaminationPaper from '../views/NewExaminationPaper';
+import ExaminationPaperHint1 from '../views/ExaminationPaperHint1';
+import ExaminationPaperHint2 from '../views/ExaminationPaperHint2';
+import ExaminationPaperInfo from '../views/ExaminationPaperInfo';
+import TestPaperComposition from '../views/TestPaperComposition';
 
 import CourseStudy from "../views/CourseStudy.vue"
 import MyClass from "../views/MyClass.vue"
@@ -258,8 +262,7 @@ export default new VueRouter({
                         name: "TestMain",
                         component: TestMain,
                     }]
-                }
-                ,
+                },
                 {
 
                     path: "newtest",
@@ -317,6 +320,32 @@ export default new VueRouter({
                     path: "newexaminationpaper",
                     name: "NewExaminationPaper",
                     component: NewExaminationPaper,
+                    children: [
+                        {
+                        path: "examinationpaperhint1",
+                        name: "ExaminationPaperHint1",
+                        component: ExaminationPaperHint1,
+                    }
+                    ,
+                        {
+                        path: "examinationpaperhint2",
+                        name: "ExaminationPaperHint2",
+                        component: ExaminationPaperHint2,
+                    }
+                    ,
+                        {
+                        path: "examinationpaperinfo",
+                        name: "ExaminationPaperInfo",
+                        component: ExaminationPaperInfo,
+                    }
+                    ,
+                        {
+                        path: "testpapercomposition",
+                        name: "TestPaperComposition",
+                        component: TestPaperComposition,
+                    }
+                    ,
+                ]
                 }, {
 
                     path: "/paginaion",
