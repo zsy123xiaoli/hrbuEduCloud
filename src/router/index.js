@@ -356,18 +356,18 @@ export default new VueRouter({
                     name: "Course",
                     component: Course,
 
-                },
+                }, {
+                    path: "/selectaddclass",
+                    name: "SelectAddclass",
+                    component: SelectAddclass,
+                }, {
+                    path: "/previewcourse",
+                    name: "PreviewCourse",
+                    component: PreviewCourse,
+        
+                }
             ]
-        }, {
-            path: "/selectaddclass",
-            name: "SelectAddclass",
-            component: SelectAddclass,
-        }, {
-            path: "/previewcourse",
-            name: "PreviewCourse",
-            component: PreviewCourse,
-
-        }
+        },
 
     ]
 })

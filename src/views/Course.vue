@@ -90,6 +90,8 @@ export default {
     padding: 20px;
     img {
       margin-right: 16px;
+      width: 356px;
+      height: 200px;
     }
     h2 {
       font-weight: 700;

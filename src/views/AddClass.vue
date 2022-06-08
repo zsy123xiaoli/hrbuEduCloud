@@ -46,8 +46,13 @@
         <div class="courserwareselect">
           <span>课件</span>
           <el-row>
-            <el-button type="primary" size="mini" @click="selectaddclass()">从资源库选取</el-button>
+            <el-button type="primary" size="mini" @click="selectaddclass()"
+              >从资源库选取</el-button
+            >
           </el-row>
+        </div>
+        <div class="selectaddclass" >
+          <SelectAddclass ref="SelectAddclass"></SelectAddclass>
         </div>
         <div class="coursewarename">
           <i class="el-icon-video-play"></i>
@@ -77,7 +82,7 @@
           <ul>
             <li>
               <i class="el-icon-video-play"></i>
-              <b >课件名称</b>
+              <b>课件名称</b>
               <i class="el-icon-close cancel" @click="del()"></i>
             </li>
             <li>
@@ -108,18 +113,19 @@
 </template>
 
 <script>
-// import SelectAddclass from "./SelectAddclass";
+import SelectAddclass from "./SelectAddclass";
 
 export default {
   name: "AddClass",
 
-//   components: { SelectAddclass },
+  components: { SelectAddclass },
 
   data() {
     return {
       show: false,
       shows0: false,
       shows1: false,
+      // Isshow: false,
       multipleSelection: [],
       textarea: "",
       text: "",
@@ -156,6 +162,13 @@ export default {
     del() {
       console.log("删除课件");
     },
+    // 控制资源库弹窗
+    selectaddclass() {
+      console.log(this.$refs.SelectAddclass.$el);
+      this.$refs.SelectAddclass.Isshow = !this.$refs.SelectAddclass.Isshow;
+      console.log(this.$refs.SelectAddclass);
+      console.log(this.$refs.SelectAddclass.Isshow);
+    },
   },
 };
 </script>
@@ -163,6 +176,9 @@ export default {
 <style lang="less" scoped>
 .addclass {
   margin-left: 75px;
+  // .selectaddclass{
+
+  // }
   .title {
     width: 838px;
     height: 40px;
