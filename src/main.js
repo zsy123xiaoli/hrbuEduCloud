@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Vue from 'vue'
 import App from './App.vue'
 import router from "./router/index"
@@ -88,4 +89,100 @@ new Vue({
     Vue.prototype.$bus = this;
 
   }
+=======
+import Vue from 'vue'
+import App from './App.vue'
+import router from "./router/index"
+
+// import Video from "video.js";
+// import "video.js/dist/video-js.min.css"
+// Vue.prototype.$video = Video
+
+
+//按需引入element-ui
+
+
+
+
+
+import {
+  Input,
+  Button,
+  Row,
+  Select,
+  Option,
+  DatePicker,
+  Table,
+  TableColumn,
+  Pagination,
+  Checkbox,
+  Message,
+  Cascader,
+  Breadcrumb,
+  BreadcrumbItem,
+  Upload,
+  Link,
+  Avatar,
+  PageHeader,
+  Collapse,
+  CollapseItem,
+  Form,
+  FormItem,
+  Radio,
+  Popover,
+  RadioGroup,
+  CheckboxGroup,
+  MessageBox,
+  Dialog
+
+} from 'element-ui';
+
+Vue.use(Dialog)
+Vue.use(Input)
+Vue.use(Button)
+Vue.use(Row)
+Vue.use(Select);
+Vue.use(Option);
+Vue.use(DatePicker);
+Vue.use(Table);
+Vue.use(TableColumn);
+Vue.use(Pagination);
+Vue.use(Checkbox);
+Vue.use(CheckboxGroup);
+Vue.use(Cascader);
+Vue.use(Breadcrumb);
+Vue.use(BreadcrumbItem);
+Vue.use(Upload);
+Vue.use(Link);
+Vue.use(Avatar);
+Vue.use(PageHeader);
+Vue.use(Collapse);
+Vue.use(CollapseItem);
+Vue.use(Form);
+Vue.use(FormItem);
+Vue.use(Radio);
+Vue.use(RadioGroup);
+Vue.use(Popover);
+
+
+
+
+
+
+
+
+Vue.prototype.$message = Message;
+Vue.prototype.$confirm = MessageBox.confirm;
+Vue.prototype.$message = Message;
+Vue.config.productionTip = false
+
+
+new Vue({
+  render: h => h(App),
+  router,
+  beforeCreate() {
+    Vue.prototype.$bus = this;
+
+  }
+>>>>>>> 86d1e0282a71c156ba53bee5babfba96155d3877
 }).$mount('#app')

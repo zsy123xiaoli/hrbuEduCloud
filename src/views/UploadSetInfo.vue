@@ -18,7 +18,9 @@
       <div class="primary">
         <div class="primary-top">
           <ul>
-            <li>第一步：上传资源</li>
+            <router-link to="/AdmMenus/UploadResource" tag="li">
+              第一步：上传资源
+            </router-link>
             <li>第二步：设置基本信息</li>
             <li>第三步：巩固刷题</li>
           </ul>
@@ -120,6 +122,7 @@ export default {
           li {
             text-align: center;
             width: 300px;
+            cursor: pointer;
             &:nth-child(2) {
               border-bottom: solid 3px rgba(1, 104, 183, 1);
             }

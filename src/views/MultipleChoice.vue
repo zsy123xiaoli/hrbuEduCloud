@@ -1,7 +1,7 @@
 <template>
-  <div class="SingleChoice">
+  <div class="MultipleChoice">
     <RepositoryMenus></RepositoryMenus>
-    <div class="singlechoice">
+    <div class="multiplechoice">
       <div class="top">
         <span class="i"></span><span class="title">基础信息</span>
         <el-row>
@@ -12,13 +12,13 @@
             clearable
           ></el-cascader>
         </el-row>
-        <span  class="changeCss">题型</span>
-        <span  class="changeCss Single">单选题</span>
-        <span  class="changeCss">多选题</span>
-        <span  class="changeCss">判断题</span>
-        <span  class="changeCss">简答题</span>
-        <span  class="changeCss">填空题</span>
-        <span  class="changeCss">编码题</span>
+        <span @click="changeCss($event)" class="changeCss">题型</span>
+        <span @click="changeCss($event)" class="changeCss">单选题</span>
+        <span @click="changeCss($event)" class="changeCss Multiple">多选题</span>
+        <span @click="changeCss($event)" class="changeCss">判断题</span>
+        <span @click="changeCss($event)" class="changeCss">简答题</span>
+        <span @click="changeCss($event)" class="changeCss">填空题</span>
+        <span @click="changeCss($event)" class="changeCss">编码题</span>
         <el-row>
           <span class="diff">难度</span>
 
@@ -149,7 +149,6 @@
             </el-dialog>
           </li>
         </ul>
-        <p class="tag">*请将正确答勾选出来</p>
       </div>
       <div class="anwser">
         <span class="i"></span><span class="title">答案与解析</span>
@@ -249,10 +248,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.SingleChoice {
+.MultipleChoice {
   display: flex;
   background-color: #f3f5f7;
-  .singlechoice {
+  .multiplechoice {
     // margin-left: 20px;
     width: 998px;
     margin: 0 auto;
@@ -281,7 +280,7 @@ export default {
         margin: 20px 0 0 45px;
         cursor: pointer;
       }
-      .Single{
+      .Multiple{
         background-color:rgb(204 255 255) ;
         color: rgb(66, 162, 235);
         border-radius:5px;
@@ -318,9 +317,6 @@ export default {
           width: 700px;
           margin-right: 20px;
         }
-      }
-      .tag{
-        padding: 20px 0 20px 40px;
       }
       /deep/ .tox-tinymce {
         margin: 0 auto;
