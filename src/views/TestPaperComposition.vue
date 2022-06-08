@@ -1,174 +1,105 @@
 <template>
-  <div class="setcourse">
-    <el-button type="primary" @click="com()">自由组卷</el-button>
-    <div class="alert" v-show="Isshow">
-      <div class="content">
-        <div class="header">
-          <h1>自由组卷</h1>
-        </div>
-        <div class="main">
-          <div class="search">
-            <el-cascader
-              :options="options1"
-              size="medium"
-              clearable
-              placeholder="选择分类"
-            ></el-cascader>
-            <span>题型</span>
-            <el-select v-model="value" clearable placeholder="请选择">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              >
-              </el-option>
-            </el-select>
-            <span>难度</span>
-            <el-select v-model="value" clearable placeholder="请选择">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              >
-              </el-option>
-            </el-select>
-            <span>关键词</span>
-            <el-input placeholder="" v-model="input" clearable> </el-input>
-            <el-button
-              class="el-button-right"
-              type="primary"
-              size="mini"
-              icon="el-icon-search"
-            ></el-button>
+  <div class="s1">
+    <div class="setcourse"  v-show="Isshow2">
+      <el-button type="primary" @click="com()" class="but"
+        >自由组卷</el-button
+      >
+      <div class="alert" v-show="Isshow">
+        <div class="content">
+          <div class="header">
+            <h1>自由组卷</h1>
           </div>
-          <div class="selectedtopic">
-            <span class="topic">已选题目：</span>
-            <span>单选题 </span><i>10</i> <span>多选题</span><i>5</i>
-            <span>判断题</span><i>3</i> <span>填空题</span><i>10</i>
+          <div class="main">
+            <div class="search">
+              <el-cascader
+                :options="options1"
+                size="medium"
+                clearable
+                placeholder="选择分类"
+              ></el-cascader>
+              <span>题型</span>
+              <el-select v-model="value" clearable placeholder="请选择">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+              <span>难度</span>
+              <el-select v-model="value" clearable placeholder="请选择">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+              <span>关键词</span>
+              <el-input placeholder="" v-model="input" clearable> </el-input>
+              <el-button
+                class="el-button-right"
+                type="primary"
+                size="mini"
+                icon="el-icon-search"
+              ></el-button>
+            </div>
+            <div class="selectedtopic">
+              <span class="topic">已选题目：</span>
+              <span>单选题 </span><i>10</i> <span>多选题</span><i>5</i>
+              <span>判断题</span><i>3</i> <span>填空题</span><i>10</i>
+            </div>
+            <div class="itembank">
+              <div class="eg">
+                <p>题型</p>
+                <p>知识点</p>
+                <div class="itemhead">
+                  <p class="itemheader">
+                    <span>题干:</span>
+                    <span>1.此处显示题干；</span>
+                    <span
+                      >2.点击题干区域展开显示选项、答案、解析等区域，再次点击时收起选项、答案、详解等区域；</span
+                    >
+                  </p>
+                  <el-button type="primary" plain>选择</el-button>
+                </div>
+              </div>
+              <div class="multiplechoice">
+                <p>单选题</p>
+                <p class="label">标签</p>
+                <div class="item">
+                  <div class="text" @click="answer()">
+                    <span>在下列标签中，哪个标签可以插入换行？（）</span>
+                  </div>
+                  <el-button type="primary" plain>选择</el-button>
+                  <div class="answer" v-show="Isshow1">
+                    <ul>
+                      <li>A. {{ A }}</li>
+                      <li>B. {{ B }}</li>
+                      <li>C. {{ C }}</li>
+                      <li>D. {{ D }}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="itembank">
-            <div class="eg">
-              <p>题型</p>
-              <p>知识点</p>
-              <div class="itemhead">
-                <p class="itemheader">
-                  <span>题干:</span>
-                  <span>1.此处显示题干；</span>
-                  <span
-                    >2.点击题干区域展开显示选项、答案、解析等区域，再次点击时收起选项、答案、详解等区域；</span
-                  >
-                </p>
-                <el-button type="primary" plain>选择</el-button>
-              </div>
-            </div>
-            <div class="eg">
-              <p>题型</p>
-              <p>知识点</p>
-              <div class="itemhead">
-                <p class="itemheader">
-                  <span>题干:</span>
-                  <span>1.此处显示题干；</span>
-                  <span
-                    >2.点击题干区域展开显示选项、答案、解析等区域，再次点击时收起选项、答案、详解等区域；</span
-                  >
-                </p>
-                <el-button type="primary" plain>选择</el-button>
-              </div>
-            </div>
-            <div class="eg">
-              <p>题型</p>
-              <p>知识点</p>
-              <div class="itemhead">
-                <p class="itemheader">
-                  <span>题干:</span>
-                  <span>1.此处显示题干；</span>
-                  <span
-                    >2.点击题干区域展开显示选项、答案、解析等区域，再次点击时收起选项、答案、详解等区域；</span
-                  >
-                </p>
-                <el-button type="primary" plain>选择</el-button>
-              </div>
-            </div>
-            <div class="eg">
-              <p>题型</p>
-              <p>知识点</p>
-              <div class="itemhead">
-                <p class="itemheader">
-                  <span>题干:</span>
-                  <span>1.此处显示题干；</span>
-                  <span
-                    >2.点击题干区域展开显示选项、答案、解析等区域，再次点击时收起选项、答案、详解等区域；</span
-                  >
-                </p>
-                <el-button type="primary" plain>选择</el-button>
-              </div>
-            </div>
-            <div class="eg">
-              <p>题型</p>
-              <p>知识点</p>
-              <div class="itemhead">
-                <p class="itemheader">
-                  <span>题干:</span>
-                  <span>1.此处显示题干；</span>
-                  <span
-                    >2.点击题干区域展开显示选项、答案、解析等区域，再次点击时收起选项、答案、详解等区域；</span
-                  >
-                </p>
-                <el-button type="primary" plain>选择</el-button>
-              </div>
-            </div>
-            <div class="eg">
-              <p>题型</p>
-              <p>知识点</p>
-              <div class="itemhead">
-                <p class="itemheader">
-                  <span>题干:</span>
-                  <span>1.此处显示题干；</span>
-                  <span
-                    >2.点击题干区域展开显示选项、答案、解析等区域，再次点击时收起选项、答案、详解等区域；</span
-                  >
-                </p>
-                <el-button type="primary" plain>选择</el-button>
-              </div>
-            </div>
-            <div class="eg">
-              <p>题型</p>
-              <p>知识点</p>
-              <div class="itemhead">
-                <p class="itemheader">
-                  <span>题干:</span>
-                  <span>1.此处显示题干；</span>
-                  <span
-                    >2.点击题干区域展开显示选项、答案、解析等区域，再次点击时收起选项、答案、详解等区域；</span
-                  >
-                </p>
-                <el-button type="primary" plain>选择</el-button>
-              </div>
-            </div>
-            <div class="eg">
-              <p>题型</p>
-              <p>知识点</p>
-              <div class="itemhead">
-                <p class="itemheader">
-                  <span>题干:</span>
-                  <span>1.此处显示题干；</span>
-                  <span
-                    >2.点击题干区域展开显示选项、答案、解析等区域，再次点击时收起选项、答案、详解等区域；</span
-                  >
-                </p>
-                <el-button type="primary" plain>选择</el-button>
-              </div>
-            </div>
-            <div class="multiplechoice"></div>
+          <div class="footer">
+            <el-button @click="com()">取消</el-button>
+            <el-button type="primary" @click="add()">添加</el-button>
           </div>
-        </div>
-        <div class="footer">
-          <el-button @click="com()">取消</el-button>
-          <el-button type="primary">添加</el-button>
         </div>
       </div>
+    </div>
+    <div class="changeitem" v-show="Isshow3">
+      <div class="head">
+        <h1>ddd</h1>
+      </div>
+      <el-button type="primary" @click="com()" class="but" 
+        >继续增加试题</el-button
+      >
     </div>
   </div>
 </template>
@@ -260,7 +191,15 @@ export default {
         },
       ],
       value: "",
+      input: "",
       Isshow: false,
+      Isshow1: false,
+      Isshow2: true,
+      Isshow3:false,
+      A: "<hr>",
+      B: "<br>",
+      C: "<p>",
+      D: "<li>",
     };
   },
 
@@ -270,6 +209,14 @@ export default {
     com() {
       this.Isshow = !this.Isshow;
     },
+    answer() {
+      this.Isshow1 = !this.Isshow1;
+    },
+    add() {
+      this.Isshow2 = false;
+      this.Isshow=!this.Isshow;
+      this.Isshow3=true;
+    },
   },
 };
 </script>
@@ -278,10 +225,11 @@ export default {
 .setcourse {
   width: 980px;
   height: 312px;
-  line-height: 312px;
   text-align: center;
-  .el-button {
+  background-color: #fff;
+  .but {
     width: 140px;
+    margin-top: 100px;
   }
   .alert {
     display: flex;
@@ -317,7 +265,7 @@ export default {
         .search {
           display: flex;
           margin-top: 10px;
-          width: 1036px;
+          width: 1016;
           height: 74px;
           line-height: 74px;
           background-color: #fff;
@@ -428,7 +376,6 @@ export default {
           border-top: 1px solid #ebebeb;
           margin-top: 5px;
           overflow: overlay;
-          // background-color: red;
           height: 390px;
           .eg {
             display: flex;
@@ -436,19 +383,20 @@ export default {
             margin-top: 10px;
             p {
               padding: 10px;
-              height: 35px;
-              line-height: 35px;
               margin-left: 10px;
+              color: #262c32;
+              font-size: 12px;
               background-color: #f8f8f8;
+              // background-color: aqua;
             }
             .itemhead {
               display: flex;
-              width: 1036px;
+              width: 1016px;
               margin: 10px 0;
               .itemheader {
+                font-size: 16px;
                 width: 825px;
                 text-align: left;
-                height: 75px;
               }
               span {
                 display: block;
@@ -470,6 +418,76 @@ export default {
               .el-button:focus {
                 background-color: #2b96e5;
                 color: #fff;
+              }
+            }
+          }
+          .multiplechoice {
+            display: flex;
+            flex-wrap: wrap;
+            border-top: 1px solid #e4e4e4;
+            p {
+              margin-top: 10px;
+              padding: 10px;
+              margin-left: 10px;
+              background-color: #f8f8f8;
+              color: #262c32;
+              font-size: 12px;
+            }
+            .label {
+              background-color: #d9ffd9;
+              color: #008000;
+              border-radius: 3px;
+              height: 26px;
+              line-height: 26px;
+              width: 50px;
+              padding: 0;
+              border: 1px solid #bcbcbc;
+            }
+            .item {
+              width: 1016px;
+              display: flex;
+              margin: 10px 0;
+              margin-left: 10px;
+              flex-wrap: wrap;
+              .text {
+                padding: 10px;
+                font-size: 16px;
+                width: 825px;
+                text-align: left;
+                background-color: #f8f8f8;
+                cursor: pointer;
+                // background-color: rebeccapurple;
+                span {
+                  display: block;
+                  line-height: 20px;
+                }
+              }
+              .el-button {
+                width: 58px;
+                height: 35px;
+                padding: 0;
+                border: 0px;
+                font-size: 12px;
+                color: #2b96e5;
+                margin-left: 10px;
+              }
+              .el-button:hover {
+                background-color: #2b96e5;
+                color: #fff;
+              }
+              .el-button:focus {
+                background-color: #2b96e5;
+                color: #fff;
+              }
+              .answer {
+                width: 825px;
+                text-align: left;
+                margin: 10px;
+                li {
+                  line-height: 36px;
+                  font-size: 14px;
+                  color: #262c32;
+                }
               }
             }
           }

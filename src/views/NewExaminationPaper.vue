@@ -16,7 +16,7 @@
       </div>
       <div class="header">
         <ul>
-          <li @click="show(1)" :class="index === 1 ? 'active' : ''">
+          <li @click="show(1)"  :class="index === 1 ? 'active' : ''">
             第一步：试卷基本信息
           </li>
           <li @click="show(2)" :class="index === 2 ? 'active' : ''">
