@@ -39,7 +39,14 @@
             </li>
             <li>
               <span>知识点</span
-              ><el-button type="primary" plain>选择知识点</el-button>
+              ><el-cascader
+            :show-all-levels="false"
+            :options="options1"
+            :props="classifyProps"
+            placeholder="请选择知识点"
+            size="medium"
+            clearable
+          ></el-cascader>
             </li>
             <li>
               <span>难度</span>
@@ -65,10 +72,76 @@
 
 <script>
 import RepositoryMenus from "../components/RepositoryMenus";
+import axios from "axios";
 
 export default {
   data() {
     return {
+      options1: [],
+      classifyProps: {
+        lazy: true,
+        lazyLoad: (node, resolve) => {
+          console.log(node)
+          setTimeout(() => {
+            if (node.level == 0) {
+              axios
+                .get(
+                  "http://127.0.0.1:3000/api/system/user/getFirstKnow",
+                  {
+                    params: {
+                      val: 1,
+                    },
+                  },
+                  {
+                    headers: {
+                      Authorization: localStorage.token,
+                    },
+                  }
+                )
+                .then((response) => {
+                  const Major = response.data.message.map((value, i) => ({
+                    value: value.KNOW_NAME,
+                    label: value.KNOW_NAME,
+                    leaf: node.level >= 1,
+                  }));
+                  // 通过调⽤resolve将⼦节点数据返回，通知组件数据加载完成
+                  resolve(Major);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            }
+            if (node.level == 1) {
+              axios
+                .get(
+                  "http://127.0.0.1:3000/api/system/user/getOtherKnow",
+                  {
+                    params: {
+                      val: node.label,
+                    },
+                  },
+                  {
+                    headers: {
+                      Authorization: localStorage.token,
+                    },
+                  }
+                )
+                .then((response) => {
+                  const areas = response.data.message.map((value, i) => ({
+                    value: value.KNOW_NAME,
+                    label: value.KNOW_NAME,
+                    leaf: node.level >= 1,
+                  }));
+                  // 通过调⽤resolve将⼦节点数据返回，通知组件数据加载完成
+                  resolve(areas);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            }
+          }, 200);
+        },
+      },
       difficulty: [
         { value: "入门" },
         { value: "初级" },

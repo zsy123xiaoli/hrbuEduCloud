@@ -17,12 +17,23 @@ import TeaInfo from "../views/TeaInfo.vue"
 import TeaEdit from "../views/TeaEdit.vue"
 import Clamanage from "../views/Clamanage.vue"
 import ClaAdd from "../views/ClaAdd.vue"
+
 //资源库
-import CoursewareLibrary from "../views/CoursewareLibrary.vue"
-import SingleChoice from "../views/SingleChoice.vue"
+import CoursewareLibrary from "../views/CoursewareLibrary"
 import UploadResource from "../views/UploadResource.vue"
 import UploadSetInfo from "../views/UploadSetInfo.vue"
 import DoExercise from "../views/UploadDoExercise.vue"
+import ItemLibrary from "../views/ItemLibrary.vue"
+import SingleChoice from "../views/SingleChoice.vue"
+import MultipleChoice from "../views/MultipleChoice.vue"
+import Judeg from "../views/Judeg.vue"
+import ShortAnswer from "../views/ShortAnswer.vue"
+import GapFilling from "../views/GapFilling.vue"
+import CodingQuestion from "../views/CodingQuestion.vue"
+
+
+
+
 
 
 
@@ -117,6 +128,7 @@ export default new VueRouter({
         },
 
         {
+
             path: "/admin",
             name: "Admindex",
             component: Admindex,
@@ -126,6 +138,7 @@ export default new VueRouter({
             path: "/AdmMenus",
             name: "AdmMenus",
             component: AdmMenus,
+
 
             children: [{
                     path: "Stumanage",
@@ -185,11 +198,7 @@ export default new VueRouter({
                     name: "CoursewareLibrary",
                     component: CoursewareLibrary,
                 },
-                {
-                    path: "SingleChoice",
-                    name: "SingleChoice",
-                    component: SingleChoice,
-                },
+                
                 {
                     path: "UploadResource",
                     name: "UploadResource",
@@ -205,7 +214,45 @@ export default new VueRouter({
                     name: "DoExercise",
                     component: DoExercise,
                 },
-
+              
+            
+            {
+                path: "ItemLibrary",
+                name: "ItemLibrary",
+                component: ItemLibrary,
+            },
+            
+            {
+                path: "SingleChoice",
+                name: "SingleChoice",
+                component: SingleChoice,
+            },
+            {
+                path: "MultipleChoice",
+                name: "MultipleChoice",
+                component: MultipleChoice,
+            },
+            {
+                path: "Judeg",
+                name: "Judeg",
+                component: Judeg,
+            },
+            {
+                path: "ShortAnswer",
+                name: "ShortAnswer",
+                component: ShortAnswer,
+            },
+            {
+                path: "GapFilling",
+                name: "GapFilling",
+                component: GapFilling,
+            },
+            {
+                path: "CodingQuestion",
+                name: "CodingQuestion",
+                component: CodingQuestion,
+            },     
+            
                 {
                     path: "curriculumdesign",
                     name: "CurriculumDesign",

@@ -12,13 +12,25 @@
             clearable
           ></el-cascader>
         </el-row>
-        <span @click="changeCss($event)" class="changeCss">题型</span>
-        <span @click="changeCss($event)" class="changeCss">单选题</span>
-        <span @click="changeCss($event)" class="changeCss ">多选题</span>
-        <span @click="changeCss($event)" class="changeCss Judeg">判断题</span>
-        <span @click="changeCss($event)" class="changeCss">简答题</span>
-        <span @click="changeCss($event)" class="changeCss">填空题</span>
-        <span @click="changeCss($event)" class="changeCss">编码题</span>
+        <span  class="changeCss">题型</span>
+        <router-link to="/AdmMenus/SingleChoice" tag="span">
+          <span class="changeCss Single">单选题</span>
+        </router-link>
+        <router-link to="/AdmMenus/MultipleChoice" tag="span">
+          <span class="changeCss">多选题</span>
+        </router-link>
+        <router-link to="/AdmMenus/Judeg" tag="span">
+          <span class="changeCss JudegQuestion">判断题</span>
+        </router-link>
+        <router-link to="/AdmMenus/ShortAnswer" tag="span">
+          <span class="changeCss">简答题</span>
+        </router-link>
+        <router-link to="/AdmMenus/GapFilling" tag="span">
+          <span class="changeCss">填空题</span>
+        </router-link>
+        <router-link to="/AdmMenus/CodingQuestion" tag="span">
+          <span class="changeCss Coding">编码题</span>
+        </router-link>
         <el-row>
           <span class="diff">难度</span>
 
@@ -176,7 +188,7 @@ export default {
         margin: 20px 0 0 45px;
         cursor: pointer;
       }
-      .Judeg{
+      .JudegQuestion{
         background-color:rgb(204 255 255) ;
         color: rgb(66, 162, 235);
         border-radius:5px;

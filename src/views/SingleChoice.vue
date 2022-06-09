@@ -6,22 +6,36 @@
         <span class="i"></span><span class="title">基础信息</span>
         <el-row>
           <el-cascader
+            :show-all-levels="false"
             :options="options1"
+            :props="classifyProps"
             placeholder="请选择知识点"
             size="medium"
             clearable
           ></el-cascader>
         </el-row>
-        <span  class="changeCss">题型</span>
-        <span  class="changeCss Single">单选题</span>
-        <span  class="changeCss">多选题</span>
-        <span  class="changeCss">判断题</span>
-        <span  class="changeCss">简答题</span>
-        <span  class="changeCss">填空题</span>
-        <span  class="changeCss">编码题</span>
+
+        <span class="changeCss">题型</span>
+        <router-link to="/AdmMenus/SingleChoice" tag="span">
+          <span class="changeCss Single">单选题</span>
+        </router-link>
+        <router-link to="/AdmMenus/MultipleChoice" tag="span">
+          <span class="changeCss">多选题</span>
+        </router-link>
+        <router-link to="/AdmMenus/Judeg" tag="span">
+          <span class="changeCss">判断题</span>
+        </router-link>
+        <router-link to="/AdmMenus/ShortAnswer" tag="span">
+          <span class="changeCss">简答题</span>
+        </router-link>
+        <router-link to="/AdmMenus/GapFilling" tag="span">
+          <span class="changeCss">填空题</span>
+        </router-link>
+        <router-link to="/AdmMenus/CodingQuestion" tag="span">
+          <span class="changeCss">编码题</span>
+        </router-link>
         <el-row>
           <span class="diff">难度</span>
-
           <el-select v-model="value" style="width: 144px" placeholder="请选择">
             <el-option
               v-for="item in difficulty"
@@ -167,7 +181,8 @@
 <script>
 import RepositoryMenus from "../components/RepositoryMenus";
 import Tinymce from "../components/Tinymce";
-
+import axios from "axios";
+let id = 0;
 export default {
   data() {
     return {
@@ -190,26 +205,154 @@ export default {
         { value: "中级" },
         { value: "高级" },
       ],
+
       value: "",
-      options1: [
-        {
-          value: "zhinan",
-          label: "IT/互联网",
-          children: [
-            {
-              value: "shejiyuanze",
-              label: "前端开发",
-            },
-          ],
+      options1: [],
+      KNOW_NAME: "",
+      classifyProps: {
+        lazy: true,
+        lazyLoad: (node, resolve) => {
+          console.log(node);
+          setTimeout(() => {
+            if (node.level == 0) {
+              axios
+                .get(
+                  "http://127.0.0.1:3000/api/system/user/getFirstKnow",
+                  {
+                    params: {
+                      val: 1,
+                    },
+                  },
+                  {
+                    headers: {
+                      Authorization: localStorage.token,
+                    },
+                  }
+                )
+                .then((response) => {
+                  const Major = response.data.message.map((value, i) => ({
+                    value: value.KNOW_NAME,
+                    label: value.KNOW_NAME,
+                    leaf: node.level >= 1,
+                  }));
+                  // 通过调⽤resolve将⼦节点数据返回，通知组件数据加载完成
+                  resolve(Major);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            }
+            if (node.level == 1) {
+              axios
+                .get(
+                  "http://127.0.0.1:3000/api/system/user/getOtherKnow",
+                  {
+                    params: {
+                      val: node.label,
+                    },
+                  },
+                  {
+                    headers: {
+                      Authorization: localStorage.token,
+                    },
+                  }
+                )
+                .then((response) => {
+                  const areas = response.data.message.map((value, i) => ({
+                    value: value.KNOW_NAME,
+                    label: value.KNOW_NAME,
+                    leaf: node.level >= 1,
+                  }));
+                  // 通过调⽤resolve将⼦节点数据返回，通知组件数据加载完成
+                  resolve(areas);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            }
+          }, 200);
         },
-      ],
+      },
     };
   },
+  mounted() {
+    // this.getFirstKnow();
+    // this.getOtherKnow();
+  },
   methods: {
-    changeCss(e) {
-      e.currentTarget.style.background = "rgb(204 255 255)";
-      // document.querySelectorAll(".changeCss").style.background="#fff"
-      console.log(e.currentTarget);
+    getFirstKnow() {
+      axios
+        .get(
+          "http://127.0.0.1:3000/api/system/user/getFirstKnow",
+          {
+            params: {
+              val: 1,
+            },
+          },
+          {
+            headers: {
+              Authorization: localStorage.token,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response.data);
+
+          this.options1 = response.data.message;
+          // this.options1.children = response.data.message;
+          console.log(response.data.message);
+          console.log(this.options1);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      // axios
+      // .get(
+      //   "http://127.0.0.1:3000/api/system/user/getOtherKnow",
+      //   {
+      //     params: {
+      //       val: val
+      //     },
+      //   },
+      //   {
+      //     headers: {
+      //       Authorization: localStorage.token,
+      //     },
+      //   }
+      // )
+      // .then((response) => {
+      //   console.log(response.data);
+      //   console.log(response.data.message);
+      //   this.options1.children=response.data.message
+      // })
+      // .catch(function (error) {
+      //   console.log(error);
+      // });
+    },
+    getOtherKnow(val) {
+      console.log(val);
+      axios
+        .get(
+          "http://127.0.0.1:3000/api/system/user/getOtherKnow",
+          {
+            params: {
+              val: val,
+            },
+          },
+          {
+            headers: {
+              Authorization: localStorage.token,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response.data);
+          console.log(response.data.message);
+          this.options1.children = response.data.message;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
     handleClose(done) {
       this.$confirm("确认关闭？")
@@ -281,10 +424,10 @@ export default {
         margin: 20px 0 0 45px;
         cursor: pointer;
       }
-      .Single{
-        background-color:rgb(204 255 255) ;
+      .Single {
+        background-color: rgb(204 255 255);
         color: rgb(66, 162, 235);
-        border-radius:5px;
+        border-radius: 5px;
         padding: 5px;
       }
       .el-row {
@@ -319,7 +462,7 @@ export default {
           margin-right: 20px;
         }
       }
-      .tag{
+      .tag {
         padding: 20px 0 20px 40px;
       }
       /deep/ .tox-tinymce {

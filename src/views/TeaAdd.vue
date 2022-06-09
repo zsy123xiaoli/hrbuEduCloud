@@ -118,7 +118,7 @@ export default {
       checkedMajors: [],
       majors: majorOptions,
       //班级数据
-      checkedClasses: ["软件工程"],
+      checkedClasses: [],
       classes: classOptions,
     };
   },
@@ -165,89 +165,6 @@ export default {
       this.isIndeterminate =
         checkedCount > 0 && checkedCount < this.classes.length;
     },
-    getClass(){
-  
-      this.department = this.checkedMajors[0];
-      console.log(this.department);
-      // axios
-      //   .get(
-      //     "http://127.0.0.1:3000/api/system/user/getDepartmentClass",
-      //     {
-      //       params: {
-      //         department,
-      //       },
-      //     },
-      //     {
-      //       headers: {
-      //         Authorization: localStorage.token,
-      //       },
-      //     }
-      //   )
-      //   .then((response) => {
-      //     console.log(response);
-      //     console.log(response.data.message);
-      //     this.major = response.data.message;
-      //     response.data.message.forEach((item) => {
-           
-      //      classOptions.push(item.DEPARTMENT)
-          
-        
-      // });
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
-    },
-  
-
-    save() {
-     
-      const data = {};
-      if (this.Username) {
-        data.id = this.NAME;
-      } else {
-        alert("用户名为空");
-      }
-      
-      if (this.checkedCities[0]) {
-        data.checked = this.checkedCities[0];
-      } else {
-        alert("为空");
-      }
-      if (this.Name) {
-        data.name = this.Name;
-      } else {
-        alert("学生姓名为空");
-      }
-      if (this.Emall) {
-        const reg = /^\w+[@]\w{2,5}([.]\w{2,3}){1,3}$/;
-        console.log(reg.test(this.Emall));
-        if (reg.test(this.Emall)) {
-          data.mail = this.Emall;
-        } else {
-          alert("您输入的邮箱不符合格式请重新输入");
-          return;
-        }
-      }
-      console.log(data);
-    //   axios
-    //     .post("http://127.0.0.1:3000/api/user/addStudent", data, {
-    //       headers: {
-    //         Authorization: localStorage.token,
-    //       },
-    //     })
-    //     .then((response) => {
-    //       console.log(response);
-    //       if (response.data.status === 1) {
-    //         alert("添加成功");
-    //         return;
-    //       }
-    //     })
-    //     .catch(function (error) {
-    //       console.log(error);
-    //     });
-    },
-
     //选择院校后基于院校渲染专业
     getDepartment() {
       let school=""
@@ -282,6 +199,94 @@ export default {
           console.log(error);
         });
     },
+    getClass(){
+      const department = this.checkedMajors[0];
+      console.log(department);
+      axios
+        .get(
+          "http://127.0.0.1:3000/api/system/user/getDepartmentClass",
+          {
+            params: {
+              department,
+            },
+          },
+          {
+            headers: {
+              Authorization: localStorage.token,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+          console.log(response.data.message);
+          this.major = response.data.message;
+          response.data.message.forEach((item) => {
+           
+           classOptions.push(item.NAME)
+            
+      });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  
+
+    save() {
+     
+      const data = {};
+      if (this.Username) {
+        data.id = this.Username;
+      } else {
+        alert("用户名为空");
+      }
+      
+        if (this.Name) {
+          data.name = this.Name;
+        } else {
+          alert("教师姓名为空");
+        }
+        if (this.Emall) {
+          const reg = /^\w+[@]\w{2,5}([.]\w{2,3}){1,3}$/;
+          console.log(reg.test(this.Emall));
+          if (reg.test(this.Emall)) {
+            data.mail = this.Emall;
+          } else {
+            alert("您输入的邮箱不符合格式请重新输入");
+            return;
+          }
+        }
+        if (this.NAME) {
+        data.school = this.NAME;
+      } else {
+        alert("学校为空");
+      }
+      if (this.checkedMajors[0]) {
+        data.department = this.checkedMajors[0];
+      } else {
+        alert("专业为空");
+      }
+      console.log(data);
+      axios
+        .post("http://127.0.0.1:3000/api/user/addTeacher", data, {
+          headers: {
+            Authorization: localStorage.token,
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.data.status === 0) {
+            alert("添加成功");
+            return;
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+
+    
+    
   },
   components: { Slidemenus },
 };

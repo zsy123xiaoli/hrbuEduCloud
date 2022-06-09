@@ -132,7 +132,7 @@
           :page-sizes="[100, 200, 300, 400]"
           :page-size="pageSize"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="itemTotal"
+          
         >
         </el-pagination>
       </div>

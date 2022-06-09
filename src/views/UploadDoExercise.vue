@@ -6,7 +6,7 @@
         <div>
           <img src="../assets/hint.png" />
           <span
-            >课件名称”基本内容已编写完成，你可以直接发布，也可以设置一组试题以便学生巩固所学。。</span
+            >课件名称”基本内容已编写完成，你可以直接发布，也可以设置一组试题以便学生巩固所学。</span
           >
         </div>
         <div>
@@ -27,7 +27,9 @@
           </ul>
         </div>
         <div class="primary-bottom">
+          <router-link to="/AdmMenus/ItemLibrary">
           <el-button type="primary">添加试题</el-button>
+          </router-link>
         </div>
       </div>
     </div>

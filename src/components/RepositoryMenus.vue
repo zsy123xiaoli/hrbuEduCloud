@@ -2,11 +2,10 @@
   <div class="RepositoryMenus">
     <h2>·资源库</h2>
     <ul>
-      <li>课件库</li>
-      <li>试题库</li>
+     
 
-      <!-- <router-link to="/AdmMenus/Teamanage" tag="li">教师管理*</router-link>
-      <router-link to="/AdmMenus/Clamanage" tag="li">班级管理*</router-link> -->
+      <router-link to="/AdmMenus/CoursewareLibrary" tag="li">课件库</router-link>
+      <router-link to="/AdmMenus/ItemLibrary" tag="li">试题库</router-link> 
     </ul>
   </div>
 </template>
