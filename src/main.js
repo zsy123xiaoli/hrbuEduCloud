@@ -36,6 +36,9 @@ import {
   RadioGroup,
   CheckboxGroup,
   MessageBox,
+  Dialog,
+  Tree,
+  
 } from 'element-ui';
 
 Vue.use(Input)
@@ -62,6 +65,8 @@ Vue.use(Form);
 Vue.use(FormItem);
 Vue.use(Radio);
 Vue.use(RadioGroup);
+Vue.use(Dialog);
+Vue.use(Tree);
 
 
 

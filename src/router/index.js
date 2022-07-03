@@ -83,7 +83,20 @@ import AnswerChoice from "../views/AnswerChoice.vue"
 import ReportPage from "../views/ReportPage.vue"
 
 
-
+//系统管理
+import Menus from "../views/Menus";
+import UserManage from "../views/UserManage";
+import addUser from "../views/addUser";
+import UserMessage from "../views/UserMessage";
+import UserEdit from "../views/UserEdit";
+import PositionManage from "../views/PositionManage";
+import RoleManage from "../views/RoleManage";
+import MenuManage from "../views/MenuManage";
+import DataDictionary from "../views/DataDictionary";
+import SchoolManage from "../views/SchoolManage";
+import MajorManage from "../views/MajorManage";
+import OnlineUserManage from "../views/OnlineUserManage";
+import KnowLedge from "../views/KnowLedge";
 
 
 export default new VueRouter({
@@ -462,7 +475,152 @@ export default new VueRouter({
             name: "PreviewCourse",
             component: PreviewCourse,
 
-        }
+        },
+        {
+            path: "/menus",
+            name: "Menus",
+            component: Menus,
+            children: [
+                {
+                    path: "usermanage",
+                    name: "UserManage",
+                    component: UserManage,
+                }
+            ]
+        }, 
+        {
+            path: "/menus",
+            name: "Menus",
+            component: Menus,
+            children: [
+                {
+                    path: "addUser",
+                    name: "addUser",
+                    component: addUser,
+                }
+            ]
+        }, 
+        {
+            path: "/menus",
+            name: "Menus",
+            component: Menus,
+            children: [
+                {
+                    path: "positionmanage",
+                    name: "PositionManage",
+                    component: PositionManage,
+                }
+            ]
+        }, 
+        {
+            path: "/menus",
+            name: "Menus",
+            component: Menus,
+            children: [
+                {
+                    path: "rolemanage",
+                    name: "RoleManage",
+                    component: RoleManage,
+                }
+            ]
+        }, 
+        {
+            path: "/menus",
+            name: "Menus",
+            component: Menus,
+            children: [
+                {
+                    path: "usermessage",
+                    name: "UserMessage",
+                    component: UserMessage,
+                }, 
+            ]
+        },
+        {
+            path: "/menus",
+            name: "Menus",
+            component: Menus,
+            children: [
+                {
+                    path: "UserEdit",
+                    name: "UserEdit",
+                    component: UserEdit,
+                }, 
+            ]
+        },
+        {
+            path: "/menus",
+            name: "Menus",
+            component: Menus,
+            children: [
+                {
+                    path: "MenuManage",
+                    name: "MenuManage",
+                    component: MenuManage,
+                }, 
+            ]
+        },
+        {
+            path: "/menus",
+            name: "Menus",
+            component: Menus,
+            children: [
+                {
+                    path: "DataDictionary",
+                    name: "DataDictionary",
+                    component: DataDictionary,
+                }, 
+            ]
+        },
+        {
+            path: "/menus",
+            name: "Menus",
+            component: Menus,
+            children: [
+                {
+                    path: "SchoolManage",
+                    name: "SchoolManage",
+                    component: SchoolManage,
+                }, 
+            ]
+        },
+        {
+            path: "/menus",
+            name: "Menus",
+            component: Menus,
+            children: [
+                {
+                    path: "MajorManage",
+                    name: "MajorManage",
+                    component: MajorManage,
+                }, 
+            ]
+        },
+        {
+            path: "/menus",
+            name: "Menus",
+            component: Menus,
+            children: [
+                {
+                    path: "OnlineUserManage",
+                    name: "OnlineUserManage",
+                    component: OnlineUserManage,
+                }, 
+            ]
+        },
+        {
+            path: "/menus",
+            name: "Menus",
+            component: Menus,
+            children: [
+                {
+                    path: "KnowLedge",
+                    name: "KnowLedge",
+                    component: KnowLedge,
+                    
+                }, 
+            ]
+        },
 
     ]
 
