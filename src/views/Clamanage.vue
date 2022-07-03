@@ -46,7 +46,7 @@
           </el-select>
           <span class="ml20">状态</span>
           <el-select
-            v-model="State.value"
+            v-model="State.value1"
             clearable
             size="medium"
             placeholder="请选择"
@@ -55,7 +55,7 @@
               v-for="item in State"
               :key="item.value"
               :label="item.label"
-              :value="item.value"
+              :value="item.value1"
             >
             </el-option>
           </el-select>
@@ -138,15 +138,15 @@ export default {
     return {
       State: [
         {
-          value: 2,
+          value1: 2,
           label: "全部",
         },
         {
-          value: 1,
+          value1: 1,
           label: "有效",
         },
         {
-          value: 0,
+          value1: 0,
           label: "禁用",
         },
       ],
@@ -163,7 +163,7 @@ export default {
     };
   },
   mounted() {
-    this.State.value = 2;
+    // this.State.value1 = 2;
 
     this.getUserInfo();
   },
@@ -206,32 +206,7 @@ export default {
         });
     },
   
-    // getuserInfo(data){
-    // console.log("data",data);
-
-    // const obj = {
-    //   params:{
-    //     pageNum: this.pageNum,
-    //     pageSize: this.pageSize
-    //   }
-    // }
-    // if(data){
-    //   obj.params = {...obj.params,...data};
-    // }
-
-    //   axios
-    //   .get("/api/user/userinfo",obj)
-    //   .then((response) => {
-    //     console.log(response);
-    //     this.tableData = response.data.data.results;
-    //     this.itemTotal=response.data.data.total;
-    //     console.log(response)
-
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    // },
+  
     LookIndex(val) {
       this.multipleSelection = val;
       //对时间戳进行处理后在路由传参

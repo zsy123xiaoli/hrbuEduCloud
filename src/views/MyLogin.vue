@@ -6,7 +6,7 @@
     </div>
     <div class="Lbox">
       <h2>登录</h2>
-      <el-input placeholder="请输入用户名" v-model="username"></el-input>
+      <el-input placeholder="请输入用户名" v-model="mail"></el-input>
       <el-input
         placeholder="请输入密码"
         v-model="password"
@@ -19,34 +19,41 @@
 </template>
 
 <script>
-import axios from "axios"
+import axios from "axios";
 
 export default {
-  name:'MyLogin',
-  data(){
-    return{
-      username:"",
-      password:""
-    }
+  name: "MyLogin",
+  data() {
+    return {
+      mail: "",
+      password: "",
+    };
   },
-  methods:{
-    login(){
-     axios.post('http://127.0.0.1:3000/api/system/user/login', {
-            mail: '1836349958@qq.com',
-            password: '000000'
+  methods: {
+    login() {
+      let selfThis = this;
+      axios
+        .post("http://127.0.0.1:3000/api/system/user/login", {
+          mail: selfThis.mail,
+          password: selfThis.password,
         })
         .then(function (response) {
-            localStorage.token = `Bearer ${response.data.token}`
-            console.log(response)})
+          localStorage.token = `Bearer ${response.data.token}`;
+          if (response.data.status === 1) {
+            selfThis.$router.push("/admin");
+          } else if (response.data.state === 2) {
+            this.$router.push("/student");
+          } else if (response.data.state === 0) {
+            alert("未查询到该用户");
+          }
+          console.log(response);
+        })
         .catch(function (error) {
-            console.log(error);
+          console.log(error);
         });
-   
-        }
     },
-  
-}
-
+  },
+};
 </script>
 
 <style lang="less" scoped>
@@ -94,19 +101,19 @@ export default {
         height: 55px;
       }
     }
-    .el-button{
-        width: 450px;
-        height: 44px;
-        font-size: 18px;
-        margin-top:23px
+    .el-button {
+      width: 450px;
+      height: 44px;
+      font-size: 18px;
+      margin-top: 23px;
     }
-    span{
-        display: block;
-        width: 80px;
-        margin:12px 0 0 50px;
-        // margin-left: 50px;
-        font-size: 18px;
-        color: #666;
+    span {
+      display: block;
+      width: 80px;
+      margin: 12px 0 0 50px;
+      // margin-left: 50px;
+      font-size: 18px;
+      color: #666;
     }
   }
 }

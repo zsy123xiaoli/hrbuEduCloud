@@ -3,9 +3,9 @@
     <h2>·考试测评</h2>
     <ul>
       <router-link to="/AdmMenus/measurementmanagement" tag="li"
-        >考试管理</router-link
+        >测评管理</router-link
       >
-      <router-link to="" tag="li">测评管理</router-link>
+      <router-link to="/AdmMenus/examinationpapermanagement" tag="li">试卷管理</router-link>
       <router-link to="" tag="li">成绩与批改</router-link>
     </ul>
   </div>
@@ -22,6 +22,7 @@ export default {
   // height: (100vh-60px);
   box-shadow: #ebecee 3px 3px 3px;
   background-color: #fff;
+  height: 223px;
   h2 {
     width: 190px;
     line-height: 50px;
@@ -40,9 +41,10 @@ export default {
       height: 50px;
       padding-left: 20px;
       cursor: pointer;
-      border-left: 5px solid #eef6fc;
+      border-left: 5px solid #fff;
     }
     li:hover {
+      border-color: #eef6fc;
       background-color: #eef6fc;
       color: #42a2eb;
       text-decoration: underline;

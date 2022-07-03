@@ -96,9 +96,17 @@ export default {
     };
   },
 
-  mounted() {},
+  mounted() {
+    this.yinchang();
+  },
 
-  methods: {},
+  methods: {
+    yinchang() {
+      // console.log((this.$refs.Course.s));
+      this.$refs.Course.isActive = true;
+      // console.log((this.$refs.Course));
+    },
+  },
 };
 </script>
 
@@ -138,6 +146,16 @@ export default {
           margin-right: 10px;
         }
       }
+      ::v-deep {
+        .el-input__inner {
+          &::placeholder {
+            color: #262c32;
+          }
+        }
+        .el-input__icon {
+          color: #262c32;
+        }
+      }
       .promulgator {
         display: flex;
         height: 34px;
@@ -161,14 +179,15 @@ export default {
             border-color: #d7d8d9;
           }
         }
-        .el-row{
-          .el-button{
+        .el-row {
+          .el-button {
             width: 75px;
             height: 34px;
             margin-left: 20px;
           }
         }
       }
+
       .el-select {
         width: 100px;
         height: 34px;

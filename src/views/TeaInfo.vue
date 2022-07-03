@@ -70,7 +70,7 @@ export default {
   },
   mounted() {
 
-    this.$route.query.TIMESTAMP = dayjs(new Date(Number(this.$route.query.TIMESTAMP))).format("YYYY-MM-DD HH:mm:ss")
+   
 
     console.log(this.data.TIMESTAMP)
     

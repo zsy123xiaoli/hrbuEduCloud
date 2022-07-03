@@ -45,18 +45,16 @@
             clearable
           >
           </el-input>
-          <el-button 
-          class="el-button-right"
+          <el-button
+            class="el-button-right"
             type="primary"
             size="mini"
             icon="el-icon-search"
           ></el-button>
-          <el-button type="primary" size="medium" 
-            ><router-link to="newcurriculum" tag="i"
-              >
+          <el-button type="primary" size="medium"
+            ><router-link to="newcurriculum" tag="i">
               新增视频课
-              </router-link
-            ></el-button
+            </router-link></el-button
           >
         </el-row>
       </div>
@@ -193,7 +191,16 @@ export default {
       height: 74px;
       background-color: #fff;
       border-radius: 6px;
-
+      ::v-deep {
+        .el-input__inner {
+          &::placeholder {
+            color: #262c32;
+          }
+        }
+        .el-input__icon {
+          color: #262c32;
+        }
+      }
       .el-row {
         span {
           font-size: 14px;
@@ -226,7 +233,7 @@ export default {
             border-color: #d7d8d9;
           }
         }
-        
+
         .el-button-right {
           width: 34px;
           height: 34px;
@@ -234,7 +241,7 @@ export default {
           padding: 0;
           border-color: #dde0e7;
         }
-        .el-button{
+        .el-button {
           padding: 0;
         }
         .width30 {

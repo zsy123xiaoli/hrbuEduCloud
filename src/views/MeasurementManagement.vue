@@ -38,7 +38,7 @@
         >
       </div>
       <div class="test">
-        <TestMain/>
+        <TestMain />
       </div>
       <div class="paginaion">
         <Paginaion ref="Paginaion"></Paginaion>
@@ -50,22 +50,25 @@
 <script>
 import TestResults from "../components/TestResults";
 import Paginaion from "./Paginaion";
-import TestMain from './TestMain';
-
+import TestMain from "./TestMain";
 
 export default {
   name: "MeasurementManagement",
-  components: { TestResults, Paginaion,TestMain },
+  components: { TestResults, Paginaion, TestMain },
   data() {
     return {
       options: [
         {
           value: "选项1",
-          label: "黄金糕",
+          label: "全部",
         },
         {
           value: "选项2",
-          label: "双皮奶",
+          label: "练习",
+        },
+        {
+          value: "选项3",
+          label: "考试",
         },
       ],
       value: "",
@@ -98,16 +101,28 @@ export default {
       display: flex;
       span {
         margin: 0 10px 0 40px;
+        font-size: 14px;
+        color: #262c32;
       }
       i {
         font-style: normal;
-        
-          padding: 10px 20px;
-          display: block;
+
+        padding: 10px 20px;
+        display: block;
       }
       .el-select {
         width: 120px;
         height: 35px;
+      }
+      ::v-deep {
+        .el-input__inner {
+          &::placeholder {
+            color: #262c32;
+          }
+        }
+        .el-input__icon {
+          color: #262c32;
+        }
       }
       .el-input {
         width: 250px;
@@ -148,15 +163,14 @@ export default {
         border: 2px solid #101010;
       }
     }
-    
   }
 
-  /deep/  ul>.router-link-active:first-child {
+  /deep/ ul > .router-link-active:first-child {
     border-left: 5px solid #42a2eb;
     font-size: 16px;
     color: #262c32;
   }
-  /deep/ ul>.router-link-active:first-child:hover {
+  /deep/ ul > .router-link-active:first-child:hover {
     color: #262c32;
     text-decoration: none;
     background-color: #fff;

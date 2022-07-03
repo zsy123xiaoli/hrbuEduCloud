@@ -121,7 +121,7 @@ export default {
           font-size: 16px;
           cursor: pointer;
         }
-        li:hover {
+        .active {
           border-bottom: 3px solid #0168b7;
           color: rgb(1 104 183);
         }

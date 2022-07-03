@@ -4,10 +4,12 @@ Vue.use(VueRouter)
 import MyLogin from "../views/MyLogin.vue"
 import Admindex from "../views/Admindex.vue"
 import AdmMenus from "../components/AdmMenus.vue"
+//学生管理
 import Stumanage from "../views/Stumanage.vue"
 import StudentAdd from "../views/StudentAdd.vue"
 import StudentInfo from "../views/StudentInfo.vue"
 import StudentEdit from "../views/StudentEdit.vue"
+//教师管理
 import Teamanage from "../views/Teamanage.vue"
 
 import TeaAdd from "../views/TeaAdd.vue"
@@ -15,6 +17,25 @@ import TeaInfo from "../views/TeaInfo.vue"
 import TeaEdit from "../views/TeaEdit.vue"
 import Clamanage from "../views/Clamanage.vue"
 import ClaAdd from "../views/ClaAdd.vue"
+
+//资源库
+import CoursewareLibrary from "../views/CoursewareLibrary"
+import UploadResource from "../views/UploadResource.vue"
+import UploadSetInfo from "../views/UploadSetInfo.vue"
+import DoExercise from "../views/UploadDoExercise.vue"
+import ItemLibrary from "../views/ItemLibrary.vue"
+import SingleChoice from "../views/SingleChoice.vue"
+import MultipleChoice from "../views/MultipleChoice.vue"
+import Judeg from "../views/Judeg.vue"
+import ShortAnswer from "../views/ShortAnswer.vue"
+import GapFilling from "../views/GapFilling.vue"
+import CodingQuestion from "../views/CodingQuestion.vue"
+
+
+
+
+
+
 
 
 import StudentIndex from "../views/StudentIndex.vue"
@@ -38,6 +59,19 @@ import CourseRelease from '../views/CourseRelease';
 import MeasurementManagement from '../views/MeasurementManagement';
 import TestMain from '../views/TestMain';
 import NewTest from '../views/NewTest';
+import NewTestHint1 from '../views/NewTestHint1';
+import NewTestHint2 from '../views/NewTestHint2';
+import NewTestHint3 from '../views/NewTestHint3';
+import NewTestInfo from '../views/NewTestInfo';
+import NewTestSelectPapers from '../views/NewTestSelectPapers';
+import NewTestReleaseTesting from '../views/NewTestReleaseTesting';
+import ExaminationPaperManagement from '../views/ExaminationPaperManagement';
+import ExaminationPaper from '../views/ExaminationPaper';
+import NewExaminationPaper from '../views/NewExaminationPaper';
+import ExaminationPaperHint1 from '../views/ExaminationPaperHint1';
+import ExaminationPaperHint2 from '../views/ExaminationPaperHint2';
+import ExaminationPaperInfo from '../views/ExaminationPaperInfo';
+import TestPaperComposition from '../views/TestPaperComposition';
 
 import CourseStudy from "../views/CourseStudy.vue"
 import MyClass from "../views/MyClass.vue"
@@ -78,19 +112,19 @@ export default new VueRouter({
                     component: PublicClass,
                 },
                 {
-                    path:"MyClass",
-                    name:"MyClass",
-                    component:MyClass,
+                    path: "MyClass",
+                    name: "MyClass",
+                    component: MyClass,
                 },
                 {
-                    path:"DataSet",
-                    name:"DataSet",
-                    component:DataSet,
+                    path: "DataSet",
+                    name: "DataSet",
+                    component: DataSet,
                 },
                 {
-                    path:"ChangePassword",
-                    name:"ChangePassword",
-                    component:ChangePassword,
+                    path: "ChangePassword",
+                    name: "ChangePassword",
+                    component: ChangePassword,
                 },
                 {
                     path:"EvaluationList",
@@ -110,24 +144,30 @@ export default new VueRouter({
             ]
         },
         {
-            path:"/CourseStudy",
-            name:"CourseStudy",
-            component:CourseStudy,
+            path: "/CourseStudy",
+            name: "CourseStudy",
+            component: CourseStudy,
         },
+
         {
             path:"/AnswerChoice",
             name:"AnswerChoice",
             component:AnswerChoice,
         },
+
         {
+
             path: "/admin",
             name: "Admindex",
             component: Admindex,
         },
         {
+
             path: "/AdmMenus",
             name: "AdmMenus",
             component: AdmMenus,
+
+
             children: [{
                     path: "Stumanage",
                     name: "Stumanage",
@@ -182,10 +222,71 @@ export default new VueRouter({
                     component: ClaAdd,
                 },
                 {
+                    path: "CoursewareLibrary",
+                    name: "CoursewareLibrary",
+                    component: CoursewareLibrary,
+                },
+                
+                {
+                    path: "UploadResource",
+                    name: "UploadResource",
+                    component: UploadResource,
+                },
+                {
+                    path: "UploadSetInfo",
+                    name: "UploadSetInfo",
+                    component: UploadSetInfo,
+                },
+                {
+                    path: "DoExercise",
+                    name: "DoExercise",
+                    component: DoExercise,
+                },
+              
+            
+            {
+                path: "ItemLibrary",
+                name: "ItemLibrary",
+                component: ItemLibrary,
+            },
+            
+            {
+                path: "SingleChoice",
+                name: "SingleChoice",
+                component: SingleChoice,
+            },
+            {
+                path: "MultipleChoice",
+                name: "MultipleChoice",
+                component: MultipleChoice,
+            },
+            {
+                path: "Judeg",
+                name: "Judeg",
+                component: Judeg,
+            },
+            {
+                path: "ShortAnswer",
+                name: "ShortAnswer",
+                component: ShortAnswer,
+            },
+            {
+                path: "GapFilling",
+                name: "GapFilling",
+                component: GapFilling,
+            },
+            {
+                path: "CodingQuestion",
+                name: "CodingQuestion",
+                component: CodingQuestion,
+            },     
+            
+                {
                     path: "curriculumdesign",
                     name: "CurriculumDesign",
                     component: CurriculumDesign,
                 },
+
                 {
                     path: "newcurriculum",
                     name: "NewCurriculum",
@@ -223,9 +324,9 @@ export default new VueRouter({
                             component: NewCurriculumHint2,
 
                         },
-
-
                     ]
+
+
                 }, {
 
                     path: "courserelease",
@@ -241,20 +342,111 @@ export default new VueRouter({
                         name: "TestMain",
                         component: TestMain,
                     }]
-                }
-                , {
+                }, {
 
                     path: "newtest",
                     name: "NewTest",
                     component: NewTest,
-                }
-                , {
+                    children: [{
+
+                            path: "newtesthint1",
+                            name: "NewTestHint1",
+                            component: NewTestHint1,
+                        },
+                        {
+
+                            path: "newtesthint2",
+                            name: "NewTestHint2",
+                            component: NewTestHint2,
+                        },
+                        {
+
+                            path: "newtesthint3",
+                            name: "NewTestHint3",
+                            component: NewTestHint3,
+                        },
+                        {
+
+                            path: "newtestinfo",
+                            name: "NewTestInfo",
+                            component: NewTestInfo,
+                        },
+                        {
+
+                            path: "newtestselectpapers",
+                            name: "NewTestSelectPapers",
+                            component: NewTestSelectPapers,
+                        },
+                        {
+
+                            path: "newtestreleasetesting",
+                            name: "NewTestReleaseTesting",
+                            component: NewTestReleaseTesting,
+                        },
+                    ]
+                }, {
+
+                    path: "examinationpapermanagement",
+                    name: "ExaminationPaperManagement",
+                    component: ExaminationPaperManagement,
+                    children: [{
+                        path: "examinationpaper",
+                        name: "ExaminationPaper",
+                        component: ExaminationPaper,
+                    }]
+                }, {
+
+                    path: "newexaminationpaper",
+                    name: "NewExaminationPaper",
+                    component: NewExaminationPaper,
+                    children: [{
+                            path: "examinationpaperhint1",
+                            name: "ExaminationPaperHint1",
+                            component: ExaminationPaperHint1,
+                        },
+                        {
+                            path: "examinationpaperhint2",
+                            name: "ExaminationPaperHint2",
+                            component: ExaminationPaperHint2,
+                        },
+                        {
+                            path: "examinationpaperinfo",
+                            name: "ExaminationPaperInfo",
+                            component: ExaminationPaperInfo,
+                        },
+                        {
+                            path: "testpapercomposition",
+                            name: "TestPaperComposition",
+                            component: TestPaperComposition,
+                            children: [{
+                                    path: "testpapercomposition",
+                                    name: "TestPaperComposition",
+                                    component: TestPaperComposition,
+                                },
+                                {
+                                    path: "testpapercomposition",
+                                    name: "TestPaperComposition",
+                                    component: TestPaperComposition,
+                                },
+                                {
+                                    path: "testpapercomposition",
+                                    name: "TestPaperComposition",
+                                    component: TestPaperComposition,
+                                },
+                                {
+                                    path: "testpapercomposition",
+                                    name: "TestPaperComposition",
+                                    component: TestPaperComposition,
+                                },
+                            ]
+                        },
+                    ]
+                }, {
 
                     path: "/paginaion",
                     name: "Paginaion",
                     component: Paginaion,
-                }
-                , {
+                }, {
                     path: "/course",
                     name: "Course",
                     component: Course,
@@ -273,4 +465,5 @@ export default new VueRouter({
         }
 
     ]
+
 })

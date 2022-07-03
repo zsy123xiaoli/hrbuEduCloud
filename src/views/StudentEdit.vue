@@ -4,7 +4,7 @@
     <div class="content">
       <div class="header">
         <span>学生信息</span>
-   
+
         <div class="primary">
           <div class="top">
             <img src="../assets/u4103.png" />
@@ -18,7 +18,6 @@
                 <el-select
                   v-model="SCHOOL"
                   style="width: 358px"
-              
                   placeholder="请选择"
                 >
                   <el-option
@@ -35,7 +34,6 @@
                   @click.native="getDepartment"
                   v-model="DEPARTMENT"
                   style="width: 358px"
-
                   placeholder="请选择"
                 >
                   <el-option
@@ -85,7 +83,6 @@
               <li>
                 <span>性别</span
                 ><el-select
-    
                   v-model="SEX"
                   style="width: 358px"
                   placeholder="请选择"
@@ -103,17 +100,21 @@
               <li>
                 <span>邮箱</span>
                 <el-input
-     
-            v-model="Emallinput"
-            placeholder="请输入内容"
-            style="width: 358px"
-          ></el-input>
+                  v-model="Emallinput"
+                  placeholder="请输入内容"
+                  style="width: 358px"
+                ></el-input>
+              </li>
+              <li>
+                <span>自我介绍</span>
+                <textarea v-model="introduce"></textarea>
               </li>
             </ul>
+
             <div class="button">
-          <el-button type="primary" >保存</el-button>
-          <el-button>取消</el-button>
-        </div>
+              <el-button type="primary" @click="save">保存</el-button>
+              <el-button>取消</el-button>
+            </div>
           </div>
         </div>
       </div>
@@ -135,12 +136,13 @@ export default {
       major: [],
       DEPARTMENT: "",
       //性别信息
-      gender: [{SEX:"男"},{SEX:"女"}],
+      gender: [{ SEX: "男" }, { SEX: "女" }],
       SEX: "",
-       Classinput: "",
+      Classinput: "",
       Roolinput: "",
       Nameinput: "",
       Emallinput: "",
+      introduce: "",
     };
   },
   mounted() {
@@ -152,29 +154,98 @@ export default {
     this.Nameinput = this.$route.query.NAME;
     this.Emallinput = this.$route.query.MAIL;
   },
-  methods:{
-    getDepartment(){
-       let school=""
-   school=this.SCHOOL
-      console.log(school)
-       axios
-      .get("http://127.0.0.1:3000/api/system/user/getSchoolDepartment",{params:{
-        school
-      }},{
+  methods: {
+    getDepartment() {
+      let school = "";
+      school = this.SCHOOL;
+      console.log(school);
+      axios
+        .get(
+          "http://127.0.0.1:3000/api/system/user/getSchoolDepartment",
+          {
+            params: {
+              school,
+            },
+          },
+          {
             headers: {
-            'Authorization': localStorage.token,
-        }
+              Authorization: localStorage.token,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+          console.log(response.data.message);
+          this.major = response.data.message;
         })
-      .then((response) => {
-        console.log(response);
-        console.log(response.data.message )
-        this.major=response.data.message 
-        
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    }
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    save() {
+      const data = {};
+      if (this.SCHOOL) {
+        data.school = this.SCHOOL;
+      } else {
+        alert("学校为空");
+      }
+      if (this.DEPARTMENT) {
+        data.department = this.DEPARTMENT;
+      } else {
+        alert("专业为空");
+      }
+      if (this.SEX) {
+        data.sex = this.SEX === "男" ? 1 : 2;
+      } else {
+        alert("性别为空");
+      }
+      if (this.Classinput) {
+        data.class = this.Classinput;
+      } else {
+        alert("班级为空");
+      }
+      if (this.Roolinput) {
+        data.id = this.Roolinput;
+      } else {
+        alert("学籍号为空");
+      }
+      if (this.Nameinput) {
+        data.name = this.Nameinput;
+      } else {
+        alert("学生姓名为空");
+      }
+      if (this.Emallinput) {
+        const reg = /^\w+[@]\w{2,5}([.]\w{2,3}){1,3}$/;
+        console.log(reg.test(this.Emallinput));
+        if (reg.test(this.Emallinput)) {
+          data.newMail = this.Emallinput;
+        } else {
+          alert("您输入的邮箱不符合格式请重新输入");
+          return;
+        }
+      }
+        if (this.introduce) {
+          data.introduce = this.introduce;
+        }
+      data.mail = this.$route.query.MAIL;
+      console.log(data);
+      axios
+        .post("http://127.0.0.1:3000/api/user/setStudentInfo", data, {
+          headers: {
+            Authorization: localStorage.token,
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.data.status === 1) {
+            alert("修改成功");
+            return;
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
   },
   components: { Slidemenus },
 };
@@ -202,7 +273,7 @@ export default {
       background: #fff;
       height: 1000px;
       width: 870px;
-      overflow: hidden;
+      // overflow: hidden;
       .top {
         height: 200px;
         width: 870px;
@@ -245,12 +316,11 @@ export default {
             }
           }
         }
-         .button {
-        width: 90px;
-        margin: 0 auto;
-        display: flex;
-      }
-       
+        .button {
+          width: 90px;
+          margin: 0 auto;
+          display: flex;
+        }
       }
     }
   }

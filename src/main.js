@@ -2,16 +2,12 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from "./router/index"
 
-// import Video from "video.js";
-// import "video.js/dist/video-js.min.css"
-// Vue.prototype.$video = Video
+import Video from "video.js";
+import "video.js/dist/video-js.min.css"
+Vue.prototype.$video = Video
 
 
 //按需引入element-ui
-
-
-
-
 
 import {
   Input,
@@ -72,12 +68,12 @@ Vue.use(RadioGroup);
 
 
 
-// Vue.use(MessageBox);
-// Vue.use(Message);
+
 Vue.prototype.$message = Message;
 Vue.prototype.$confirm = MessageBox.confirm;
 Vue.prototype.$message = Message;
 Vue.config.productionTip = false
+
 
 new Vue({
   render: h => h(App),
@@ -86,4 +82,6 @@ new Vue({
     Vue.prototype.$bus = this;
 
   }
+
+
 }).$mount('#app')
