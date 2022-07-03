@@ -43,9 +43,10 @@ import CourseStudy from "../views/CourseStudy.vue"
 import MyClass from "../views/MyClass.vue"
 import DataSet from "../views/DataSet.vue"
 import ChangePassword from "../views/ChangePassword.vue"
-
-
-
+import EvaluationList from "../views/EvaluationList.vue"
+import AssessDetails from "../views/AssessDetails.vue"
+import AnswerChoice from "../views/AnswerChoice.vue"
+import ReportPage from "../views/ReportPage.vue"
 
 
 
@@ -91,6 +92,21 @@ export default new VueRouter({
                     name:"ChangePassword",
                     component:ChangePassword,
                 },
+                {
+                    path:"EvaluationList",
+                    name:"EvaluationList",
+                    component:EvaluationList,
+                },
+                {
+                    path:"AssessDetails",
+                    name:"AssessDetails",
+                    component:AssessDetails,
+                },
+                {
+                    path:"ReportPage",
+                    name:"ReportPage",
+                    component:ReportPage,
+                },
             ]
         },
         {
@@ -98,7 +114,11 @@ export default new VueRouter({
             name:"CourseStudy",
             component:CourseStudy,
         },
-       
+        {
+            path:"/AnswerChoice",
+            name:"AnswerChoice",
+            component:AnswerChoice,
+        },
         {
             path: "/admin",
             name: "Admindex",

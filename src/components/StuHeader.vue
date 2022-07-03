@@ -7,7 +7,7 @@
   <ul class="stumenus">
           <router-link to="/student" tag="li">首页</router-link>
           <router-link to="/StuMenus/allcourses" tag="li">课程</router-link>
-          <li>考试测评</li>
+          <router-link to="/StuMenus/EvaluationList" tag="li">考试测评</router-link>
    </ul>
    <ul class="unlogin">
           <router-link to="/StuMenus/myclass" tag="li">学生姓名</router-link>
